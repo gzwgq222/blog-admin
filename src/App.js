@@ -6,16 +6,30 @@ const { Header, Sider, Content, Footer } = Layout
 class App extends Component {
   state = {
     collapsed: false,
+    menuList: [
+      { icon: 'home', title: '首页'},
+      { icon: 'edit', title: '文章'},
+      { icon: 'bars', title: '分类'}
+    ]
   };
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed,
     });
   }
+  menuItem = () => {
+    return this.state.menuList.map((item, index) => {
+      return (
+      <Menu.Item key={ index }>
+        <Icon type={ item.icon } />
+        <span>{ item.title }</span>
+      </Menu.Item>)
+    })
+  }
   render() {
     return (
       <div>
-        <Layout>
+        <Layout style={{height: '100vh'}}>
           <Sider
             trigger={null}
             collapsible
@@ -23,18 +37,7 @@ class App extends Component {
           >
             <div className="logo" />
             <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-              <Menu.Item key="1">
-                <Icon type="user" />
-                <span>nav 1</span>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Icon type="video-camera" />
-                <span>nav 2</span>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Icon type="upload" />
-                <span>nav 3</span>
-              </Menu.Item>
+              { this.menuItem() }
             </Menu>
           </Sider>
           <Layout>
@@ -45,10 +48,7 @@ class App extends Component {
                 onClick={this.toggle}
               />
             </Header>
-            <Content style={{
-              margin: '24px 16px', padding: 24, background: '#fff'
-            }}
-            >
+            <Content className='content'>
               Content
             </Content>
             <Footer style={{ textAlign: 'center' }}>
