@@ -1,3 +1,4 @@
+import api from './api'
 import React, { Component } from 'react';
 import './App.css';
 import { Layout, Menu, Icon } from 'antd'
@@ -16,6 +17,11 @@ class App extends Component {
     this.setState({
       collapsed: !this.state.collapsed,
     });
+  }
+  async componentDidMount () {
+    console.log(111111, api)
+    const { code } = await api.get('/user/bar')
+    console.log(code)
   }
   menuItem = () => {
     return this.state.menuList.map((item, index) => {
