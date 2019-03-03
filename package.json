@@ -12,11 +12,13 @@
     "react": "^16.8.3",
     "react-app-rewired": "^2.1.0",
     "react-dom": "^16.8.3",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",
     "yarn": "^1.13.0"
   },
   "scripts": {
-    "start": "set PORT=9000 &&react-app-rewired start",
+    "start": "set PORT=2019 &&react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-scripts-rewired test",
     "eject": "react-scripts eject"
@@ -29,5 +31,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "react-router-dom": "^4.3.1"
+  }
 }
