@@ -87,7 +87,6 @@ class articleList extends React.Component {
   }
 
   handleSubmit = (e) => {
-    console.log(21)
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
