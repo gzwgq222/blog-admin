@@ -1,8 +1,8 @@
 import React from 'react'
 import api from '../../api'
-
+// Tag
 import {
-  Table, Tag, Form, Icon, Input, Button 
+  Table, Form, Icon, Input, Button, message
 } from 'antd';
 
 // function hasErrors(fieldsError) {
@@ -15,49 +15,54 @@ class articleList extends React.Component {
       data: [],
       columns: [
         {
+          title: 'ID',
+          dataIndex: '_id',
+          key: '_id'
+        },
+        {
           title: '标题',
-          dataIndex: 'name',
+          dataIndex: 'title',
           key: 'title'
         },
         {
           title: '作者',
-          dataIndex: 'age',
+          dataIndex: 'name',
           key: 'name',
         },
         {
           title: '关键字',
-          dataIndex: 'age',
+          dataIndex: 'keywaorld',
           key: 'keywaorld',
         },
-        {
-          title: '标签',
-          key: 'tags',
-          dataIndex: 'tags',
-          render: tags => (
-            <span>
-              {tags.map(tag => {
-                let color = tag.length > 5 ? 'geekblue' : 'green';
-                if (tag === 'loser') {
-                  color = 'volcano';
-                }
-                return <Tag color={color} key={tag}>{tag.toUpperCase()}</Tag>;
-              })}
-            </span>
-          ),
-        },
+        // {
+        //   title: '标签',
+        //   key: 'tags',
+        //   dataIndex: 'tags',
+        //   render: tags => (
+        //     <span>
+        //       {tags.map(tag => {
+        //         let color = tag.length > 5 ? 'geekblue' : 'green';
+        //         if (tag === 'loser') {
+        //           color = 'volcano';
+        //         }
+        //         return <Tag color={color} key={tag}>{tag.toUpperCase()}</Tag>;
+        //       })}
+        //     </span>
+        //   ),
+        // },
         {
           title: '分类',
-          dataIndex: 'age',
+          dataIndex: 'classify',
           key: 'classify',
         },
         {
           title: '状态',
-          dataIndex: 'age',
+          dataIndex: 'state',
           key: 'state',
         },
         {
           title: '观看-点赞-评论',
-          dataIndex: 'age',
+          dataIndex: 'viewTotal',
           key: 'viewTotal',
         },
         {
@@ -76,21 +81,33 @@ class articleList extends React.Component {
   handleClick () {
     console.log(this)
   }
-  async componentDidMount() {
+  componentDidMount() {
     // To disabled submit button at the beginning.
     // this.props.form.validateFields();
-    const {code, data } = await api.get('example/info', {name: 'gong'})
+    this.getList()
+  }
+  async getList () {
+    const {code, data } = await api.get('example/info')
+    console.log(data)
     if (code === 1000) this.setState({
       data
     })
-    console.log(data)
   }
-
+  async handleCreate () {
+    const { code } = await api.post('example/add', {name: '小花'})
+    if (code === 1000) this.getList()
+    console.log(1211)
+  }
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields( async(err, values) => {
       if (!err) {
         console.log('Received values of form: ', values)
+        const { code } = await api.post('example/add', values)
+        if (code === 1000) {
+          message.success('新增成功！')
+          this.getList()
+        }
       }
     });
   }
@@ -101,8 +118,8 @@ class articleList extends React.Component {
     } = this.props.form
     // disabled={hasErrors(getFieldsError())
     // Only show error after a field is touched.
-    const userNameError = isFieldTouched('userName') && getFieldError('userName');
-    const passwordError = isFieldTouched('password') && getFieldError('password');
+    const userNameError = isFieldTouched('name') && getFieldError('name');
+    const passwordError = isFieldTouched('title') && getFieldError('title');
     return (
       <div>
         <Form layout="inline" onSubmit={this.handleSubmit}>
@@ -110,30 +127,30 @@ class articleList extends React.Component {
             validateStatus={userNameError ? 'error' : ''}
             help={userNameError || ''}
           >
-            {getFieldDecorator('userName', {
-              rules: [{ required: true, message: 'Please input your username!' }],
+            {getFieldDecorator('name', {
+              rules: [{ required: true, message: '请输入作者名字!' }],
             })(
-              <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+              <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="请输入作者名字" />
             )}
           </Form.Item>
           <Form.Item
             validateStatus={passwordError ? 'error' : ''}
             help={passwordError || ''}
           >
-            {getFieldDecorator('password', {
-              rules: [{ required: true, message: 'Please input your Password!' }],
+            {getFieldDecorator('title', {
+              rules: [{ required: true, message: '请输入标题' }],
             })(
-              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="请输入标题" />
             )}
           </Form.Item>
           <Form.Item>
           <Button className='mr10' type="primary" htmlType="submit">
             search
           </Button>
-          <Button type='primary'>create</Button>
+          <Button type='primary' onClick={ this.handleCreate.bind(this) }>create</Button>
         </Form.Item>
       </Form>
-      <Table columns={ this.state.columns } dataSource={ this.state.data } />
+      <Table columns={ this.state.columns } dataSource={ this.state.data } rowKey={record => record._id}/>
       </div>
     )
   }
