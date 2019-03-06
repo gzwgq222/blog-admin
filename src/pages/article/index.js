@@ -89,15 +89,11 @@ class articleList extends React.Component {
   }
   async getList () {
     const {code, data } = await api.get('example/info')
-    console.log(data)
-    if (code === 1000) this.setState({
-      data
-    })
+    if (code === 1000) this.setState({ data })
   }
   async handleCreate () {
     const { code } = await api.post('example/add', {name: '小花'})
     if (code === 1000) this.getList()
-    console.log(1211)
   }
   handleSubmit = (e) => {
     e.preventDefault();

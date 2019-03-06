@@ -27,19 +27,14 @@ class App extends Component {
       collapsed: !this.state.collapsed,
     });
   }
-  async componentDidMount () {
-    // console.log(this)
-    // const data = await api.get('users/bar')
-    // this.setState({
-    //   data
-    // })
-    // const person = await api.get('example/info', {name: 'gong'})
-    // console.log(person)
+  async componentDidMount () {}
+  handleClickMenuItem (item) {
+    sessionStorage.setItem('menuItmeKey', String(item.key))
   }
   menuItem = () => {
     return this.state.menuList.map((item, index) => {
       return (
-      <Menu.Item key={ index }>
+      <Menu.Item key={ index } onClick={ item => this.handleClickMenuItem(item) }>
         <Link to={item.path}>
           <Icon type={ item.icon } />
           <span>{ item.title }</span>
@@ -47,7 +42,6 @@ class App extends Component {
       </Menu.Item>)
     })
   }
-
   render() {
     return (
       <BrowserRouter>
@@ -59,7 +53,7 @@ class App extends Component {
               collapsed={this.state.collapsed}
             >
               <div className="logo" />
-              <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
+              <Menu theme="dark" mode="inline" defaultSelectedKeys={ [sessionStorage.getItem('menuItmeKey') || '0'] }>
                 { this.menuItem() }
               </Menu>
             </Sider>
