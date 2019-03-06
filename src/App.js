@@ -52,7 +52,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Layout style={{height: '100vh'}}>
+          <Layout style={{minHeight: '100vh'}}>
             <Sider
               trigger={null}
               collapsible

@@ -1,5 +1,6 @@
 import React from 'react'
 import api from '../../api'
+import { Link } from 'react-router-dom';
 // Tag
 import {
   Table, Form, Icon, Input, Button, message
@@ -147,10 +148,12 @@ class articleList extends React.Component {
           <Button className='mr10' type="primary" htmlType="submit">
             search
           </Button>
-          <Button type='primary' onClick={ this.handleCreate.bind(this) }>create</Button>
+          <Link to='article-item'>
+            <Button type='primary'>create</Button>
+          </Link>
         </Form.Item>
       </Form>
-      <Table columns={ this.state.columns } dataSource={ this.state.data } rowKey={record => record._id}/>
+      <Table columns={ this.state.columns } dataSource={ this.state.data } rowKey={record => record._id} className='mt10' />
       </div>
     )
   }
