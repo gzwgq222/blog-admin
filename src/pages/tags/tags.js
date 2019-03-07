@@ -11,8 +11,12 @@ class articleList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       visible: false,
       tag: '',
+      params: {
+        name: ''
+      },
       data: [],
       columns: [
         {
@@ -33,47 +37,55 @@ class articleList extends React.Component {
         {
           title: 'Action',
           key: 'action',
-          render: (text, record) => (
+          width: 120,
+          align: 'center',
+          render: record => (
             <span>
-              <Button type='danger' onClick={ _ => this.handleClick()}>delete</Button>
+              <Button ghost type='danger' onClick={this.handleClick.bind(this, record)}>delete</Button>
             </span>
           ),
         }
       ]
     }
   }
-
-  handleClick () {
-    console.log(this)
+  async handleClick (record) {
+    const {code} = await api.post('tag/delete', {id: record.id})
+    if (code === 1000) {
+      message.success('删除成功')
+      this.getList()
+    }
   }
   componentDidMount() {
-
     console.log(new Date(1551952832698))
     // To disabled submit button at the beginning.
     // this.props.form.validateFields();
     this.getList()
   }
   async getList () {
-    const {code, data } = await api.get('tag/list')
-    if (code === 1000) this.setState({ data })
-  }
-  async handleCreate () {
-    const { code } = await api.post('example/add', {name: '小花'})
-    if (code === 1000) this.getList()
+    this.setState({loading: true})
+    const {code, data } = await api.get('tag/list', this.state.params)
+    if (code === 1000) {
+      this.setState({ data })
+      this.setState({loading: false})
+    }
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.props.form)
     this.props.form.validateFields( async(err, values) => {
-      // if (!err) {
-      //   console.log('Received values of form: ', values)
-      //   const { code } = await api.post('example/add', values)
-      //   if (code === 1000) {
-      //     message.success('新增成功！')
-      //     this.getList()
-      //   }
-      // }
-      console.log(32)
+      if (!err) {
+        console.log(values.name)
+        const data = Object.assign({}, this.state.params, { name: 1 })
+        this.setState({
+          params: data
+        })
+        console.log(11, this.state.params)
+        this.getList()
+        // const { code } = await api.post('example/add', values)
+        // if (code === 1000) {
+        //   message.success('新增成功！')
+        //   this.getList()
+        // }
+      }
     });
   }
   handdleChange (e) {
@@ -94,6 +106,7 @@ class articleList extends React.Component {
     this.setState({visible: false})
   }
   render() {
+    const { getFieldDecorator } = this.props.form
     return (
       <div>
         <Modal
@@ -105,7 +118,9 @@ class articleList extends React.Component {
         </Modal>
         <Form layout="inline" onSubmit={this.handleSubmit}>
           <Form.Item>
+          {getFieldDecorator('name')(
             <Input placeholder="请输入标签名" />
+          )}
           </Form.Item>
           <Form.Item>
             {/* htmlType="submit" */}
@@ -113,7 +128,13 @@ class articleList extends React.Component {
           <Button type='primary' onClick={ _ => this.setState({visible: true}) }>create</Button>
         </Form.Item>
       </Form>
-      <Table columns={ this.state.columns } dataSource={ this.state.data } rowKey={record => record._id} className='mt10' />
+      <Table
+      bordered
+      className='mt10'
+      loading={ this.state.loading }
+      columns={ this.state.columns }
+      dataSource={ this.state.data }
+      rowKey={record => record._id} />
       </div>
     )
   }

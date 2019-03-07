@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { message } from 'antd';
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL = '/api';
 
@@ -13,7 +13,7 @@ axios.interceptors.request.use(
     return config
   },
   error => {
-    console.log(error)
+    message.error('请求出错了， 请稍后重试')
     return Promise.reject(error)
   }
 );
@@ -31,6 +31,7 @@ axios.interceptors.response.use(
     return response;
   },
   error => {
+    message.error('请求出错了， 请稍后重试')
     return Promise.reject(error)
   }
 )

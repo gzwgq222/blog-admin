@@ -11,10 +11,11 @@ class articleList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       data: [],
       columns: [
         {
-          title: 'id',
+          title: 'ID',
           dataIndex: 'id',
           key: 'id'
         },
@@ -67,6 +68,8 @@ class articleList extends React.Component {
         {
           title: 'Action',
           key: 'action',
+          width: 120,
+          align: 'center',
           render: (text, record) => (
             <span>
               <Button type='danger' onClick={ _ => this.handleClick()}>delete</Button>
@@ -86,8 +89,12 @@ class articleList extends React.Component {
     this.getList()
   }
   async getList () {
+    this.setState({loading: true})
     const {code, data } = await api.get('example/info')
-    if (code === 1000) this.setState({ data })
+    if (code === 1000) {
+      this.setState({ data })
+      this.setState({loading: false})
+    }
   }
   async handleCreate () {
     const { code } = await api.post('example/add', {name: '小花'})
@@ -147,7 +154,13 @@ class articleList extends React.Component {
           </Link>
         </Form.Item>
       </Form>
-      <Table columns={ this.state.columns } dataSource={ this.state.data } rowKey={record => record._id} className='mt10' />
+      <Table
+      bordered
+      className='mt10'
+      loading={this.state.loading}
+      columns={ this.state.columns }
+      dataSource={ this.state.data }
+      rowKey={record => record._id} />
       </div>
     )
   }
