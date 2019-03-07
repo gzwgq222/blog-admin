@@ -2,9 +2,7 @@ import React from 'react'
 import api from '../../api'
 import { Link } from 'react-router-dom';
 // Tag
-import {
-  Table, Form, Icon, Input, Button, message
-} from 'antd';
+import { Table, Form, Icon, Input, Button, message } from 'antd';
 
 // function hasErrors(fieldsError) {
 //   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -16,9 +14,9 @@ class articleList extends React.Component {
       data: [],
       columns: [
         {
-          title: 'ID',
-          dataIndex: '_id',
-          key: '_id'
+          title: 'id',
+          dataIndex: 'id',
+          key: 'id'
         },
         {
           title: '标题',
@@ -155,4 +153,5 @@ class articleList extends React.Component {
   }
 }
 const article = Form.create({ name: 'horizontal_login' })(articleList)
+
 export default article

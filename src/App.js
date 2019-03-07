@@ -18,7 +18,8 @@ class App extends Component {
       menuList: [
         { icon: 'home', title: '首页', path: '/' },
         { icon: 'edit', title: '文章', path: '/article' },
-        { icon: 'bars', title: '分类', path: '/info' }
+        { icon: 'bars', title: '分类', path: '/info' },
+        { icon: 'tags', title: '标签', path: '/tags' }
       ]
     }
   }
