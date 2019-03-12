@@ -14,9 +14,8 @@ class articleList extends React.Component {
       loading: false,
       visible: false,
       tag: '',
-      params: {
-        name: ''
-      },
+      name: '',
+      page: 10,
       data: [],
       columns: [
         {
@@ -56,14 +55,13 @@ class articleList extends React.Component {
     }
   }
   componentDidMount() {
-    console.log(new Date(1551952832698))
     // To disabled submit button at the beginning.
     // this.props.form.validateFields();
     this.getList()
   }
-  async getList () {
+  async getList (name) {
     this.setState({loading: true})
-    const {code, data } = await api.get('tag/list', this.state.params)
+    const {code, data } = await api.get('tag/list', {name, page: this.state.page})
     if (code === 1000) {
       this.setState({ data })
       this.setState({loading: false})
@@ -73,13 +71,7 @@ class articleList extends React.Component {
     e.preventDefault();
     this.props.form.validateFields( async(err, values) => {
       if (!err) {
-        console.log(values.name)
-        const data = Object.assign({}, this.state.params, { name: 1 })
-        this.setState({
-          params: data
-        })
-        console.log(11, this.state.params)
-        this.getList()
+        this.getList(values.name)
         // const { code } = await api.post('example/add', values)
         // if (code === 1000) {
         //   message.success('新增成功！')
@@ -119,7 +111,7 @@ class articleList extends React.Component {
         <Form layout="inline" onSubmit={this.handleSubmit}>
           <Form.Item>
           {getFieldDecorator('name')(
-            <Input placeholder="请输入标签名" />
+            <Input placeholder="请输入标签名" allowClear={true} />
           )}
           </Form.Item>
           <Form.Item>
@@ -134,7 +126,7 @@ class articleList extends React.Component {
       loading={ this.state.loading }
       columns={ this.state.columns }
       dataSource={ this.state.data }
-      rowKey={record => record._id} />
+      rowKey={record => record.id} />
       </div>
     )
   }
