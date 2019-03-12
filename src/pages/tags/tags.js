@@ -15,7 +15,9 @@ class articleList extends React.Component {
       visible: false,
       tag: '',
       name: '',
-      page: 10,
+      pageNo: 1,
+      pageSize: 10,
+      total: null,
       data: [],
       columns: [
         {
@@ -61,9 +63,10 @@ class articleList extends React.Component {
   }
   async getList (name) {
     this.setState({loading: true})
-    const {code, data } = await api.get('tag/list', {name, page: this.state.page})
+    const {code, data, total } = await api.get('tag/list', {name, pageNo: this.state.pageNo, pageSize: this.state.pageSize,})
     if (code === 1000) {
       this.setState({ data })
+      this.setState({ total })
       this.setState({loading: false})
     }
   }
@@ -72,11 +75,6 @@ class articleList extends React.Component {
     this.props.form.validateFields( async(err, values) => {
       if (!err) {
         this.getList(values.name)
-        // const { code } = await api.post('example/add', values)
-        // if (code === 1000) {
-        //   message.success('新增成功！')
-        //   this.getList()
-        // }
       }
     });
   }
@@ -96,6 +94,13 @@ class articleList extends React.Component {
   }
   handleCancel () {
     this.setState({visible: false})
+  }
+  // page
+  async handleOnChange (page) {
+    await this.setState({
+      pageNo: page.current
+    })
+    this.getList()
   }
   render() {
     const { getFieldDecorator } = this.props.form
@@ -123,10 +128,16 @@ class articleList extends React.Component {
       <Table
       bordered
       className='mt10'
+      pagination={{
+        pageSize: this.state.pageSize,
+        total: this.state.total
+      }}
       loading={ this.state.loading }
       columns={ this.state.columns }
       dataSource={ this.state.data }
-      rowKey={record => record.id} />
+      rowKey={record => record.id}
+      onChange={(page) => this.handleOnChange(page)}
+      />
       </div>
     )
   }
