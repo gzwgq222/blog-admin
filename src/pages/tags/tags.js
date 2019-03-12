@@ -30,7 +30,7 @@ class articleList extends React.Component {
           dataIndex: 'date',
           key: 'date',
           render: date => (
-            <span>{  date }</span>
+            <span>{  date.slice(0, 10) }</span>
           )
         },
         {
