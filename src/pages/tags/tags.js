@@ -21,14 +21,21 @@ class articleList extends React.Component {
       data: [],
       columns: [
         {
-          title: '标签名',
+          title: 'Index',
+          dataIndex: 'index',
+          key: 'index',
+          width: 80,
+          align: 'center'
+        },
+        {
+          title: 'Name',
           dataIndex: 'name',
           render: name => (
             <Tag color='cyan'>{ name }</Tag>
           )
         },
         {
-          title: '创建时间',
+          title: 'Time',
           dataIndex: 'date',
           key: 'date',
           render: date => (
@@ -65,9 +72,14 @@ class articleList extends React.Component {
     this.setState({loading: true})
     const {code, data, total } = await api.get('tag/list', {name, pageNo: this.state.pageNo, pageSize: this.state.pageSize,})
     if (code === 1000) {
-      this.setState({ data })
-      this.setState({ total })
-      this.setState({loading: false})
+      data.forEach((item, index) => {
+        item.index = this.state.pageSize * (this.state.pageNo - 1) + index + 1
+      })
+      this.setState({ 
+        data,
+        total,
+        loading: false
+       })
     }
   }
   handleSubmit = (e) => {
@@ -98,7 +110,8 @@ class articleList extends React.Component {
   // page
   async handleOnChange (page) {
     await this.setState({
-      pageNo: page.current
+      pageNo: page.current,
+      pageSize: page.pageSize
     })
     this.getList()
   }
@@ -129,8 +142,13 @@ class articleList extends React.Component {
       bordered
       className='mt10'
       pagination={{
+        showSizeChanger: true,
+        total: this.state.total,
         pageSize: this.state.pageSize,
-        total: this.state.total
+        pageSizeOptions: ['10', '20', '30', '40'],
+        showTotal (total) {
+          return `Total ${total} `
+        }
       }}
       loading={ this.state.loading }
       columns={ this.state.columns }
