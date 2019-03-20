@@ -1,9 +1,9 @@
 import React from 'react'
-import { Route } from 'react-router-dom';
-import Home from '../home'
+import { Route } from 'react-router-dom'
+import Home from '../pages/home'
 import Info from '../info'
 import Article from '../pages/article'
-import ArticleItem from '../pages/article/articleItem'
+import ArticleItem from '../pages/article/item'
 import Tags from '../pages/tags/tags'
 
 export default  <div>

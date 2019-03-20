@@ -72,11 +72,11 @@ class articleList extends React.Component {
       pageNo: this.state.pageNo,
       pageSize: this.state.pageSize
     }
-    const {code, data, total } = await api.get('tag/list', params)
+    const {data, total } = await api.get('tag/list', params)
     data.forEach((item, index) => {
       item.index = this.state.pageSize * (this.state.pageNo - 1) + index + 1
     })
-    this.setState({ 
+    this.setState({
       data,
       total,
       loading: false
@@ -87,7 +87,10 @@ class articleList extends React.Component {
     e.preventDefault();
     this.props.form.validateFields( async(err, values) => {
       if (!err) {
-        await this.setState({name: values.name || ''})
+        await this.setState({
+          pageNo: 1,
+          name: values.name || ''
+        })
         this.getList()
       }
     });
@@ -143,6 +146,7 @@ class articleList extends React.Component {
       bordered
       className='mt10'
       pagination={{
+        current: this.state.pageNo,
         showSizeChanger: true,
         total: this.state.total,
         pageSize: this.state.pageSize,

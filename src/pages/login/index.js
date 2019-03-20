@@ -3,8 +3,8 @@ import React from 'react'
 class Article extends React.Component {
   render() {
     return (
-      <div>
-        <p>home</p>
+      <div className='login'>
+        <p>welcome to login</p>
       </div>
     )
   }

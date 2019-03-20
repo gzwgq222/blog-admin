@@ -13,21 +13,18 @@ class articleList extends React.Component {
     this.state = {
       loading: false,
       data: [],
+      pageNo: 1,
+      pageSize: 10,
       columns: [
         {
-          title: 'ID',
-          dataIndex: 'id',
-          key: 'id'
+          title: 'Index',
+          dataIndex: 'index',
+          key: 'index'
         },
         {
           title: '标题',
           dataIndex: 'title',
           key: 'title'
-        },
-        {
-          title: '作者',
-          dataIndex: 'name',
-          key: 'name',
         },
         {
           title: '关键字',
@@ -61,20 +58,12 @@ class articleList extends React.Component {
           key: 'state',
         },
         {
-          title: '观看-点赞-评论',
-          dataIndex: 'viewTotal',
-          key: 'viewTotal',
-        },
-        {
-          title: 'Action',
-          key: 'action',
-          width: 120,
-          align: 'center',
-          render: (text, record) => (
-            <span>
-              <Button type='danger' onClick={ _ => this.handleClick()}>delete</Button>
-            </span>
-          ),
+          title: '创建时间',
+          dataIndex: 'createdAt',
+          key: 'createdAt',
+          render: createdAt => (
+            <div>{createdAt.slice(0, 10)}</div>
+          )
         }
       ]
     }
@@ -91,8 +80,13 @@ class articleList extends React.Component {
   async getList () {
     this.setState({loading: true})
     const {data } = await api.get('/list')
-    this.setState({ data })
-    this.setState({loading: false})
+    data.forEach((item, index) => {
+      item.index = this.state.pageSize * (this.state.pageNo - 1) + index + 1
+    })
+    this.setState({
+      data,
+      loading: false
+     })
   }
   async handleCreate () {
     const { code } = await api.post('example/add', {name: '小花'})
@@ -158,7 +152,7 @@ class articleList extends React.Component {
       loading={this.state.loading}
       columns={ this.state.columns }
       dataSource={ this.state.data }
-      rowKey={record => record._id} />
+      rowKey={record => record.id} />
       </div>
     )
   }
