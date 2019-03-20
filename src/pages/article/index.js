@@ -90,15 +90,13 @@ class articleList extends React.Component {
   }
   async getList () {
     this.setState({loading: true})
-    const {code, data } = await api.get('example/info')
-    if (code === 1000) {
-      this.setState({ data })
-      this.setState({loading: false})
-    }
+    const {data } = await api.get('/list')
+    this.setState({ data })
+    this.setState({loading: false})
   }
   async handleCreate () {
     const { code } = await api.post('example/add', {name: '小花'})
-    if (code === 1000) this.getList()
+    if (code === 200) this.getList()
   }
   handleSubmit = (e) => {
     e.preventDefault();

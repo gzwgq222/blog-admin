@@ -44,6 +44,7 @@ class App extends Component {
     })
   }
   render() {
+    const logoClass = this.state.collapsed ? 'logoMin' : 'logoMax'
     return (
       <BrowserRouter>
         <div>
@@ -53,7 +54,7 @@ class App extends Component {
               collapsible
               collapsed={this.state.collapsed}
             >
-              <div className="logo" />
+              <div className={logoClass} />
               <Menu theme="dark" mode="inline" defaultSelectedKeys={ [sessionStorage.getItem('menuItmeKey') || '0'] }>
                 { this.menuItem() }
               </Menu>
@@ -66,9 +67,12 @@ class App extends Component {
                   onClick={this.toggle}
                 />
               </Header>
-              <Content className='content'>{ Routers }</Content>
+              <Content className='content'>
+              首页
+              { Routers }
+              </Content>
               <Footer style={{ textAlign: 'center' }}>
-                Ant Design ©2018 Created by Ant UED
+                Created by Gong
               </Footer>
             </Layout>
           </Layout>

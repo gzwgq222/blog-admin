@@ -36,10 +36,9 @@ class articleList extends React.Component {
         },
         {
           title: 'Time',
-          dataIndex: 'date',
-          key: 'date',
-          render: date => (
-            <span>{  date.slice(0, 10) }</span>
+          dataIndex: 'createdAt',
+          render: createdAt => (
+            <span>{ createdAt.slice(0, 10) }</span>  
           )
         },
         {
@@ -57,52 +56,54 @@ class articleList extends React.Component {
     }
   }
   async handleClick (record) {
-    const {code} = await api.post('tag/delete', {id: record.id})
-    if (code === 1000) {
-      message.success('删除成功')
-      this.getList()
-    }
+    await api.post('tag/destroy', {id: record.id})
+    message.success('删除成功')
+    this.getList()
   }
   componentDidMount() {
     // To disabled submit button at the beginning.
     // this.props.form.validateFields();
     this.getList()
   }
-  async getList (name) {
+  async getList () {
     this.setState({loading: true})
-    const {code, data, total } = await api.get('tag/list', {name, pageNo: this.state.pageNo, pageSize: this.state.pageSize,})
-    if (code === 1000) {
-      data.forEach((item, index) => {
-        item.index = this.state.pageSize * (this.state.pageNo - 1) + index + 1
-      })
-      this.setState({ 
-        data,
-        total,
-        loading: false
-       })
+    const params = {
+      name: this.state.name,
+      pageNo: this.state.pageNo,
+      pageSize: this.state.pageSize
     }
+    const {code, data, total } = await api.get('tag/list', params)
+    data.forEach((item, index) => {
+      item.index = this.state.pageSize * (this.state.pageNo - 1) + index + 1
+    })
+    this.setState({ 
+      data,
+      total,
+      loading: false
+      })
   }
+  // 查询
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields( async(err, values) => {
       if (!err) {
-        this.getList(values.name)
+        await this.setState({name: values.name || ''})
+        this.getList()
       }
     });
   }
   handdleChange (e) {
     this.setState({tag: e.target.value})
   }
+  // 新增
   async handleOk () {
-    const { code } = await api.post('tag/create', {name: this.state.tag})
-    if (code === 1000) {
-      this.setState({
-        visible: false,
-        tag: ''
-      })
-      message.success('新增成功！')
-      this.getList()
-    }
+    await api.post('tag/create', {name: this.state.tag})
+    this.setState({
+      visible: false,
+      tag: ''
+    })
+    message.success('新增成功！')
+    this.getList()
   }
   handleCancel () {
     this.setState({visible: false})
