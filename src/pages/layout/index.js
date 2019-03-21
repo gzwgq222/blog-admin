@@ -16,7 +16,7 @@ class App extends Component {
       data: 'hello',
       person: '',
       menuList: [
-        { icon: 'home', title: '首页', path: '/home' },
+        { icon: 'home', title: '首页', path: '/page' },
         { icon: 'edit', title: '文章', path: '/article' },
         { icon: 'bars', title: '分类', path: '/info' },
         { icon: 'tags', title: '标签', path: '/tags' }

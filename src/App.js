@@ -11,8 +11,9 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          {/* <Route exact path="/login" component={Login} /> */}
-          <Route path="/" component={Layout} />
+          <Route path="/login" component={Login} />
+          <Layout />
+          {/* <Route excat path="/" component={Layout} /> */}
         </div>
       </BrowserRouter>
     );

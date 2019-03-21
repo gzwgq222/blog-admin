@@ -7,7 +7,7 @@ import ArticleItem from '../pages/article/item'
 import Tags from '../pages/tags/tags'
 
 export default  <div>
-  <Route path="/home" component={Home} />
+  <Route path="/page" component={Home} />
   <Route path="/info" component={Info} />
   <Route path="/article" component={Article} />
   <Route path="/article-item" component={ArticleItem} />
