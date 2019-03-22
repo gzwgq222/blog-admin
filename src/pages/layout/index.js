@@ -1,8 +1,9 @@
 // import api from './api'
 import React, { Component } from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { BrowserRouter, Link, Route } from 'react-router-dom';
 import '../../App.css';
 import { Layout, Menu, Icon } from 'antd'
+import routes from '../../Router/layout'
 
 const { Header, Sider, Content, Footer } = Layout
 
@@ -13,13 +14,7 @@ class App extends Component {
     this.state = {
       collapsed: false,
       data: 'hello',
-      person: '',
-      menuList: [
-        { icon: 'home', title: '首页', path: '/home/page' },
-        { icon: 'edit', title: '文章', path: '/home/article' },
-        { icon: 'bars', title: '分类', path: '/home/info' },
-        { icon: 'tags', title: '标签', path: '/home/tags' }
-      ]
+      person: ''
     }
   }
   toggle = () => {
@@ -32,7 +27,7 @@ class App extends Component {
     sessionStorage.setItem('menuItmeKey', String(item.key))
   }
   menuItem = () => {
-    return this.state.menuList.map((item, index) => {
+    return routes.map((item, index) => {
       return (
       <Menu.Item key={ index } onClick={ item => this.handleClickMenuItem(item) }>
         <Link to={item.path}>
@@ -67,6 +62,13 @@ class App extends Component {
                 />
               </Header>
               <Content className='content'>
+              {routes.map((route, i) => (
+                <Route
+                key={i}
+                path={route.path}
+                component={route.component}
+              />
+              ))}
               </Content>
               <Footer style={{ textAlign: 'center' }}>
                 Created by Gong

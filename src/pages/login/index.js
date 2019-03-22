@@ -1,7 +1,8 @@
 import React from 'react'
-import { Form, Icon, Input, Button, Card  } from 'antd';
+import { Form, Icon, Input, Button, Card, message  } from 'antd';
 import Particles from 'reactparticles.js'
-import './index.css'
+import './index.less'
+import api from '../../api';
 
 class login extends React.Component {
   constructor (props) {
@@ -10,10 +11,14 @@ class login extends React.Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.history.push('/home/page')
-    this.props.form.validateFields((err, values) => {
+    // this.props.history.push('/home/page')
+    this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        const {code, desc} = await api.post('/loginIn', values)
+        if (code === 1000) {
+         message.success(desc)
+         this.props.history.push('/home/page')
+        }
       }
     });
   }
@@ -27,19 +32,19 @@ class login extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <Form.Item>
               {getFieldDecorator('userName', {
-                rules: [{ required: true, message: 'Please input your username!' }],
+                rules: [{ required: true, message: '请输入用户名' }],
               })(
                 <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
               )}
             </Form.Item>
             <Form.Item>
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Please input your Password!' }],
+                rules: [{ required: true, message: '请输入密码' }],
               })(
                 <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
               )}
             </Form.Item>
-            <Button type="primary" htmlType="submit" className="login-form-button">Log in</Button>
+            <Button type="primary" htmlType="submit" className="login-form-button" block>Log in</Button>
           </Form>
         </Card>
       </div>
