@@ -10,6 +10,7 @@ class login extends React.Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
+    this.props.history.push('/home/page')
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
