@@ -1,20 +1,32 @@
 import React from 'react'
-import { Form, Icon, Input, Button, Card  } from 'antd';
+import { Form, Icon, Input, Button, Card, message  } from 'antd';
 import Particles from 'reactparticles.js'
-import './index.css'
+import './index.less'
+import api from '../../api'
 
 class login extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      loading: false
+    }
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields(async (err, values) => {
+      this.props.history.push('/')
       if (!err) {
-        console.log('Received values of form: ', values);
+        this.setState({
+          loading: true
+        })
+        const {desc, code} = await api.post('/loginIn', values)
+        this.setState({
+          loading: false
+        })
+        if (code === 1000) message.success(desc)
+        message.error(desc)
       }
-    });
+    })
   }
 
   render() {
@@ -26,19 +38,26 @@ class login extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <Form.Item>
               {getFieldDecorator('userName', {
-                rules: [{ required: true, message: 'Please input your username!' }],
+                rules: [{ required: true, message: '请输入用户名' }],
               })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="请输入用户名" />
               )}
             </Form.Item>
             <Form.Item>
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Please input your Password!' }],
+                rules: [{ required: true, message: '请输入密码' }],
               })(
-                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="请输入密码" />
               )}
             </Form.Item>
-            <Button type="primary" htmlType="submit" className="login-form-button">Log in</Button>
+            <Button
+            block
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+            loading={ this.state.loading }>
+            Log in
+            </Button>
           </Form>
         </Card>
       </div>
