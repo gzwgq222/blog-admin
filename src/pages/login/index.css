@@ -1,0 +1,15 @@
+.particles {
+  /* width: 300px; */
+}
+.login {
+  width: 99vw;
+  height: 100vh;
+  position: relative;
+}
+.login-form {
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%)
+}

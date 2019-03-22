@@ -143,23 +143,21 @@ class articleList extends React.Component {
         </Form.Item>
       </Form>
       <Table
-      bordered
-      className='mt10'
-      pagination={{
-        current: this.state.pageNo,
-        showSizeChanger: true,
-        total: this.state.total,
-        pageSize: this.state.pageSize,
-        pageSizeOptions: ['10', '20', '30', '40'],
-        showTotal (total) {
-          return `Total ${total} `
-        }
-      }}
-      loading={ this.state.loading }
-      columns={ this.state.columns }
-      dataSource={ this.state.data }
-      rowKey={record => record.id}
-      onChange={(page) => this.handleOnChange(page)}
+        bordered
+        className='mt10'
+        pagination={{
+          current: this.state.pageNo,
+          showSizeChanger: true,
+          total: this.state.total,
+          pageSize: this.state.pageSize,
+          pageSizeOptions: ['10', '20', '30', '40'],
+          showTotal (total) { return `Total ${total} `}
+        }}
+        loading={ this.state.loading }
+        columns={ this.state.columns }
+        dataSource={ this.state.data }
+        rowKey={record => record.id}
+        onChange={(page) => this.handleOnChange(page)}
       />
       </div>
     )

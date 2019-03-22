@@ -5,8 +5,11 @@ class Article extends React.Component {
     super(props)
     this.state = {}
   }
+  componentDidMount () {
+    console.log(1, this.props)
+  }
   handleClick () {
-    this.props.history.push('/login')
+    this.props.history.push('/')
   }
   render() {
     return (
