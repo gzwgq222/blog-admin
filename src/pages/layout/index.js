@@ -1,5 +1,4 @@
 // import api from './api'
-import Routers from '../../Router/router'
 import React, { Component } from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import '../../App.css';
@@ -68,7 +67,6 @@ class App extends Component {
                 />
               </Header>
               <Content className='content'>
-              { Routers }
               </Content>
               <Footer style={{ textAlign: 'center' }}>
                 Created by Gong
