@@ -23,11 +23,11 @@ axios.interceptors.request.use(
 //http response 拦截器
 axios.interceptors.response.use(
   res => {
-    const data = res.data
-    if (data.code !== 1000) {
-      message.error(data.desc)
-      return Promise.reject(data)
-    }
+    // const data = res.data
+    // if (data.code !== 1000) {
+    //   message.error(data.desc)
+    //   return Promise.reject(data)
+    // }
     return res
   },
   error => {

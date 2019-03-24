@@ -14,7 +14,7 @@ class Article extends React.Component {
   render() {
     return (
       <div>
-        <p onClick={this.handleClick.bind(this)}>to login</p>
+        <p onClick={this.handleClick.bind(this)}>home</p>
       </div>
     )
   }

@@ -11,13 +11,15 @@ class login extends React.Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    // this.props.history.push('/home/page')
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        const {code, desc} = await api.post('/loginIn', values)
+        const {code, desc, data} = await api.post('/loginIn', values)
         if (code === 1000) {
-         message.success(desc)
-         this.props.history.push('/home/page')
+          message.success(desc)
+          sessionStorage.setItem('blogUser', data.name)
+          this.props.history.push('/home/page')
+        } else {
+          message.error(desc)
         }
       }
     });
@@ -34,14 +36,14 @@ class login extends React.Component {
               {getFieldDecorator('userName', {
                 rules: [{ required: true, message: '请输入用户名' }],
               })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="请输入用户名" />
               )}
             </Form.Item>
             <Form.Item>
               {getFieldDecorator('password', {
                 rules: [{ required: true, message: '请输入密码' }],
               })(
-                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="请输入密码" />
               )}
             </Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button" block>Log in</Button>

@@ -1,7 +1,6 @@
 // import api from './api'
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import './App.css';
 import routes from './Router'
 
 class App extends Component {
@@ -12,7 +11,6 @@ class App extends Component {
         {routes.map((route, i) => (
           <Route
           key={i}
-          excat={!!route.excat}
           path={route.path}
           render={props => (
             <route.component {...props} routes={route.routes} />
