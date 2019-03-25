@@ -5,7 +5,8 @@ import {
   Tag
 } from 'antd'
 import './sider.css'
-// import { color } from '../../utils/utils'
+import api from '../../../api'
+import { color } from '../../../utils'
 
 class SiderCustom extends Component {
   constructor() {
@@ -16,21 +17,12 @@ class SiderCustom extends Component {
     this.getTags = this.getTags.bind(this)
   }
   componentDidMount() {
-    // this.getTags()
+    this.getTags()
   }
-  getTags() {
-    // axios.get('/api/tags')
-    //   .then(res => {
-    //     if (res.status === 200 && res.data.code === 0) {
-    //       this.setState({
-    //         tags: res.data.tags
-    //       })
-    //     }
-    //   })
-    //   .catch(err => {
-    //     throw(err)
-    //   })
-  }
+  async getTags () {
+    const {data, code} = await api.get('tag/list/all')
+    code === 1000 && this.setState({tags: data})
+   }
   render() {
     return (
       <div className="sider-container">
@@ -64,19 +56,17 @@ class SiderCustom extends Component {
         <div className="tags-wrapper">
           <Card title="标签" bordered={false}>
             <div className="tags-content">
-              {/* {
-                this.state.tags ?
-                  this.state.tags.map(v => (
-                    <Tag
-                      key = {v}
-                      color={color[Math.floor(Math.random()*color.length)]}
-                      onClick={()=>this.props.history.push(`/app/tags/${v}`)}
-                    >
-                      {v}
-                    </Tag>
-                  ))
-                : null
-              } */}
+              {
+                this.state.tags.map(v => (
+                  <Tag
+                    key = {v.id}
+                    color={color[Math.floor(Math.random()*color.length)]}
+                    // onClick={()=>this.props.history.push(`/app/tags/${v}`)}
+                  >
+                    {v.name}
+                  </Tag>
+                ))
+              }
             </div>
           </Card>
         </div>
