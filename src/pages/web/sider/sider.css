@@ -1,0 +1,62 @@
+.sider-container {
+}
+.sider-container
+.ant-card-body {
+  padding: 0;
+}
+.sider-container 
+.recent-list {
+  width: 100%;
+}
+.sider-container 
+.recent-list li {
+  display: block;
+  padding: 5px 24px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 32px;
+  color: #8590a6;
+  text-align: left;
+}
+.sider-container 
+.recent-list li:hover {
+  color: rgb(0, 132, 255);
+  background: rgb(246, 246, 246);
+}
+
+.admin-info {
+  background: #fff;
+  margin-bottom: 20px;
+}
+.admin-info header {
+  text-align: center;
+  padding: 15px 0 0 0;
+}
+.admin-info header img {
+  width: 150px;
+  height: 150px;
+  max-width: 100%;
+  border-radius: 50%;
+}
+.admin-name {
+  text-align: center;
+  font-weight: bold;
+  padding: 8px 0px;
+  font-size: 1.5em;
+  font-family: "Monospace Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.admin-desc {
+  text-align: center;
+  padding: 10px 15px 20px 15px;
+  font-size: 14px;
+}
+.tags-wrapper {
+  margin-top: 20px;
+}
+
+.tags-content {
+  padding: 20px;
+}
+.tags-content .ant-tag {
+  margin: 6px;
+}

@@ -1,0 +1,41 @@
+.header-container .logo {
+  width: 100%;
+  height: 31px;
+  line-height: 31px;
+  /* background: rgba(127, 181, 255,.2);   */
+  margin: 16px 28px 16px 0;
+  float: left;
+  padding-left: 10px;
+}
+.header-container .nav-auth {
+  float: right;
+  right: 10px;
+} 
+
+.user-info {
+  flex-direction: row-reverse;
+  margin-top: 12px;
+}
+.user-info .user-avatar {
+  border-radius: 50%;
+}
+.user-logout {
+  padding: 20px;
+}
+
+.header-container .ant-menu-horizontal {
+  height: 64px;
+  line-height: 64px;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: none;
+}
+
+
+.ant-dropdown-menu-item a i {
+  padding-right: 5px;
+}
+
+.ant-layout-header {
+  background: rgb(255, 255, 255);
+}

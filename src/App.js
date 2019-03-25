@@ -1,6 +1,10 @@
 // import api from './api'
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Redirect
+} from 'react-router-dom';
 import routes from './Router'
 
 class App extends Component {
@@ -8,6 +12,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
+        <Route exact path="/" render={() => <Redirect to="/web" push />} />
         {routes.map((route, i) => (
           <Route
           key={i}
