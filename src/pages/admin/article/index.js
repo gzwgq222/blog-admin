@@ -1,8 +1,8 @@
 import React from 'react'
-import api from '../../api'
 import { Link } from 'react-router-dom';
 // Tag
 import { Table, Form, Icon, Input, Button, message } from 'antd';
+import api from '../../../api'
 
 // function hasErrors(fieldsError) {
 //   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -141,7 +141,7 @@ class articleList extends React.Component {
           <Button className='mr10' type="primary" htmlType="submit">
             search
           </Button>
-          <Link to='/home/article-item'>
+          <Link to='/admin/article-item'>
             <Button type='primary'>create</Button>
           </Link>
         </Form.Item>

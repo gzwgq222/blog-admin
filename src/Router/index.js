@@ -1,5 +1,5 @@
-import Login from '../pages/login'
-import Layout from '../pages/layout'
+import Login from '../pages/admin/login'
+import Layout from '../pages/admin/layout'
 import layoutRouter from './layout'
 
 const routes = [
@@ -9,7 +9,7 @@ const routes = [
     component: Login
   },
   {
-    path: '/home',
+    path: '/admin',
     component: Layout,
     routes: layoutRouter
   }

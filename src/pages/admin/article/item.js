@@ -5,7 +5,7 @@ import { Editor } from 'react-draft-wysiwyg'
 import draftToHtml from 'draftjs-to-html'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import './item.less'
-import api from '../../api'
+import api from '../../../api'
 
 const { Option } = Select
 

@@ -1,42 +1,34 @@
-import Info from '../info'
-import Article from '../pages/article'
-import Tags from '../pages/tags'
-import Home from '../pages/home'
-import ArticleItem from '../pages/article/item'
+import Article from '../pages/admin/article'
+import Tags from '../pages/admin/tags'
+import Home from '../pages/admin/home'
+import ArticleItem from '../pages/admin/article/item'
 
 const routes = [
   {
     menu: true,
     icon: 'home',
     title: '首页',
-    path: '/home/page',
+    path: '/admin/page',
     component: Home
-  },
-  {
-    menu: true,
-    icon: 'bars',
-    title: '分类',
-    path: '/home/info',
-    component: Info
   },
   {
     menu: true,
     icon: 'edit',
     title: '文章',
-    path: '/home/article',
+    path: '/admin/article',
     component: Article
   },
   {
     menu: true,
     icon: 'tags',
     title: '标签',
-    path: '/home/tags',
+    path: '/admin/tags',
     component: Tags
   },
   {
     icon: 'edit',
     title: '文章详情',
-    path: '/home/article-item',
+    path: '/admin/article-item',
     component: ArticleItem
   }
 ]
