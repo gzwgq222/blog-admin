@@ -14,6 +14,7 @@ class createArticle extends React.Component {
     super(props)
     this.state = {
       tag: [],
+      category: [],
       editorState: EditorState.createEmpty()
     }
   }
@@ -23,7 +24,8 @@ class createArticle extends React.Component {
   async getTagList () {
    const {data, code} = await api.get('tag/list/all')
    if (code === 1000) this.setState({tag: data})
-   console.log(this.state.tag)
+   const category = await api.get('category/list/all')
+   if (category.code === 1000) this.setState({category: category.data})
   }
   handleSubmit = (e) => {
     e.preventDefault()
@@ -35,7 +37,10 @@ class createArticle extends React.Component {
       } 
     })
   }
-  handleChangeSelect (val) {
+  handleChangeTag (val) {
+    console.log(val)
+  }
+  handlChangeeCategory (val) {
     console.log(val)
   }
   onEditorStateChange (editorState) {
@@ -57,7 +62,10 @@ class createArticle extends React.Component {
       }
     }
     const { getFieldDecorator } = this.props.form
-    let optionChildren = this.state.tag.map(tag => {
+    let categoryOption = this.state.category.map(category => {
+      return <Option value={category.id} key={category.id}>{category.name}</Option>
+    })
+    let tagOption = this.state.tag.map(tag => {
       return <Option value={tag.id} key={tag.id}>{tag.name}</Option>
     })
 
@@ -98,6 +106,20 @@ class createArticle extends React.Component {
             <Input placeholder="请输入封面链接" />
           )}
         </Form.Item>
+        <Form.Item label='分类'>
+          {getFieldDecorator('category', {
+            rules: [{ required: true, message: '请选择分类' }],
+          })(
+          <Select
+          mode="multiple"
+          style={{ width: '100%' }}
+          placeholder="请选择标签"
+          addonBefore='标签'
+          onChange={this.handlChangeeCategory.bind(this)}>
+          { categoryOption }
+        </Select>
+          )}
+        </Form.Item>
         <Form.Item label='标签'>
           {getFieldDecorator('tag', {
             rules: [{ required: true, message: '请选择标签' }],
@@ -107,8 +129,8 @@ class createArticle extends React.Component {
           style={{ width: '100%' }}
           placeholder="请选择标签"
           addonBefore='标签'
-          onChange={this.handleChangeSelect.bind(this)}>
-          { optionChildren }
+          onChange={this.handleChangeTag.bind(this)}>
+          { tagOption }
         </Select>
           )}
         </Form.Item>

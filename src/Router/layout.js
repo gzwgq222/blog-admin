@@ -1,6 +1,7 @@
-import Article from '../pages/admin/article'
 import Tags from '../pages/admin/tags'
 import Home from '../pages/admin/home'
+import Category from '../pages/admin/category'
+import Article from '../pages/admin/article'
 import ArticleItem from '../pages/admin/article/item'
 
 const routes = [
@@ -24,6 +25,13 @@ const routes = [
     title: '标签',
     path: '/admin/tags',
     component: Tags
+  },
+  {
+    menu: true,
+    icon: 'folder',
+    title: '分类',
+    path: '/admin/category',
+    component: Category
   },
   {
     icon: 'edit',

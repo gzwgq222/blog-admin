@@ -28,7 +28,7 @@ class articleList extends React.Component {
           align: 'center'
         },
         {
-          title: 'Tag',
+          title: 'Category',
           dataIndex: 'name',
           render: name => (
             <Tag color='cyan'>{ name }</Tag>
@@ -56,7 +56,7 @@ class articleList extends React.Component {
     }
   }
   async handleClick (record) {
-    await api.post('tag/destroy', {id: record.id})
+    await api.post('category/destroy', {id: record.id})
     message.success('删除成功')
     this.getList()
   }
@@ -72,7 +72,7 @@ class articleList extends React.Component {
       pageNo: this.state.pageNo,
       pageSize: this.state.pageSize
     }
-    const {data, total } = await api.get('tag/list', params)
+    const {data, total } = await api.get('category/list', params)
     data.forEach((item, index) => {
       item.index = this.state.pageSize * (this.state.pageNo - 1) + index + 1
     })
@@ -100,7 +100,7 @@ class articleList extends React.Component {
   }
   // 新增
   async handleOk () {
-    const {code, data} = await api.post('tag/create', {name: this.state.tag})
+    const {code, data} = await api.post('category/create', {name: this.state.tag})
     this.setState({
       visible: false,
       tag: ''
@@ -125,16 +125,16 @@ class articleList extends React.Component {
     return (
       <div>
         <Modal
-          title="标签"
+          title="分类"
           visible={ this.state.visible }
           onOk={this.handleOk.bind(this)}
           onCancel={ this.handleCancel.bind(this) }>
-          <Input placeholder="请输入标签名" value={ this.state.tag } onChange={ e => this.handdleChange(e) } />
+          <Input placeholder="请输入分类名" value={ this.state.tag } onChange={ e => this.handdleChange(e) } />
         </Modal>
         <Form layout="inline" onSubmit={this.handleSubmit}>
           <Form.Item>
           {getFieldDecorator('name')(
-            <Input placeholder="请输入标签名" allowClear={true} />
+            <Input placeholder="请输入分类名" allowClear={true} />
           )}
           </Form.Item>
           <Form.Item>

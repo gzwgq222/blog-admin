@@ -22,12 +22,12 @@ class articleList extends React.Component {
           key: 'index'
         },
         {
-          title: '标题',
+          title: 'Title',
           dataIndex: 'title',
           key: 'title'
         },
         {
-          title: '关键字',
+          title: 'Key',
           dataIndex: 'keywaorld',
           key: 'keywaorld',
         },
@@ -48,17 +48,17 @@ class articleList extends React.Component {
         //   ),
         // },
         {
-          title: '分类',
+          title: 'Category',
           dataIndex: 'classify',
           key: 'classify',
         },
         {
-          title: '状态',
+          title: 'State',
           dataIndex: 'state',
           key: 'state',
         },
         {
-          title: '创建时间',
+          title: 'CreatedTime',
           dataIndex: 'createdAt',
           key: 'createdAt',
           render: createdAt => (
