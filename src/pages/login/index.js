@@ -14,17 +14,15 @@ class login extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields(async (err, values) => {
-      this.props.history.push('/')
       if (!err) {
-        this.setState({
-          loading: true
-        })
-        const {desc, code} = await api.post('/loginIn', values)
-        this.setState({
-          loading: false
-        })
-        if (code === 1000) message.success(desc)
-        message.error(desc)
+        const {code, desc, data} = await api.post('/loginIn', values)
+        if (code === 1000) {
+          message.success(desc)
+          sessionStorage.setItem('blogUser', data.name)
+          this.props.history.push('/home/page')
+        } else {
+          message.error(desc)
+        }
       }
     })
   }
@@ -50,14 +48,7 @@ class login extends React.Component {
                 <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="请输入密码" />
               )}
             </Form.Item>
-            <Button
-            block
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
-            loading={ this.state.loading }>
-            Log in
-            </Button>
+            <Button type="primary" htmlType="submit" className="login-form-button" block>Log in</Button>
           </Form>
         </Card>
       </div>

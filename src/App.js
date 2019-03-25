@@ -1,19 +1,22 @@
 // import api from './api'
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
-import './App.css';
-import Login from './pages/login'
-import Layout from './pages/layout'
-
+import { BrowserRouter, Route } from 'react-router-dom';
+import routes from './Router'
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div>
-          <Route exact path="/" render={()=><Link to='/login'><h3>home page</h3></Link>} />
-          <Route path="/login" component={Login} />
-          <Route excat path="/home" component={Layout} />
+        {routes.map((route, i) => (
+          <Route
+          key={i}
+          path={route.path}
+          render={props => (
+            <route.component {...props} routes={route.routes} />
+          )}
+         />
+        ))}
         </div>
       </BrowserRouter>
     );

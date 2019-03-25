@@ -1,13 +1,20 @@
 import { Form, Input, Button, Select } from 'antd'
 import React from 'react'
+import { EditorState, convertToRaw, ContentState } from 'draft-js'
+import { Editor } from 'react-draft-wysiwyg'
+import draftToHtml from 'draftjs-to-html'
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import './item.less'
 import api from '../../api'
+
 const { Option } = Select
 
 class createArticle extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tag: []
+      tag: [],
+      editorState: EditorState.createEmpty()
     }
   }
   componentDidMount () {
@@ -20,6 +27,8 @@ class createArticle extends React.Component {
   }
   handleSubmit = (e) => {
     e.preventDefault()
+    const editorContent = draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))
+    console.log(editorContent)
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values)
@@ -29,11 +38,16 @@ class createArticle extends React.Component {
   handleChangeSelect (val) {
     console.log(val)
   }
+  onEditorStateChange (editorState) {
+    this.setState({
+      editorState
+    })
+  }
   render() {
     const formItemLayout = {
       labelCol: {
         xs: { span: 8 },
-        sm: { span: 6 },
+        sm: { span: 5 },
         xxl: { span: 2 },
       },
       wrapperCol: {
@@ -46,6 +60,7 @@ class createArticle extends React.Component {
     let optionChildren = this.state.tag.map(tag => {
       return <Option value={tag.id} key={tag.id}>{tag.name}</Option>
     })
+
     return (
       <Form onSubmit={this.handleSubmit} {...formItemLayout}>
         <Form.Item label='标题'>
@@ -96,6 +111,13 @@ class createArticle extends React.Component {
           { optionChildren }
         </Select>
           )}
+        </Form.Item>
+        <Form.Item label='内容' wrapperCol={{span: 19}}>
+          <Editor
+            editorState={this.state.editorState}
+            editorClassName="editor"
+            onEditorStateChange={this.onEditorStateChange.bind(this)}
+          />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" className="login-form-button">

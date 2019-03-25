@@ -100,12 +100,13 @@ class articleList extends React.Component {
   }
   // 新增
   async handleOk () {
-    await api.post('tag/create', {name: this.state.tag})
+    const {code, data} = await api.post('tag/create', {name: this.state.tag})
     this.setState({
       visible: false,
       tag: ''
     })
-    message.success('新增成功！')
+    if (code === 1000) message.success('新增成功！')
+    else message.error(data)
     this.getList()
   }
   handleCancel () {

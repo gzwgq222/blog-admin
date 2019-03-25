@@ -9,12 +9,12 @@ class Article extends React.Component {
     console.log(1, this.props)
   }
   handleClick () {
-    this.props.history.push('/')
+    this.props.history.push('/login')
   }
   render() {
     return (
-      <div className='login'>
-        <p onClick={this.handleClick.bind(this)}>to login</p>
+      <div>
+        <p onClick={this.handleClick.bind(this)}>home</p>
       </div>
     )
   }

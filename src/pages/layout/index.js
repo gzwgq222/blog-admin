@@ -1,9 +1,9 @@
 // import api from './api'
-import Routers from '../../Router/router'
 import React, { Component } from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
-import '../../App.css';
-import { Layout, Menu, Icon } from 'antd'
+import { Link, Route } from 'react-router-dom';
+import { Layout, Menu, Icon, Avatar, Dropdown } from 'antd'
+import routes from '../../Router/layout'
+import './index.less'
 
 const { Header, Sider, Content, Footer } = Layout
 
@@ -15,12 +15,7 @@ class App extends Component {
       collapsed: false,
       data: 'hello',
       person: '',
-      menuList: [
-        { icon: 'home', title: '首页', path: '/page' },
-        { icon: 'edit', title: '文章', path: '/article' },
-        { icon: 'bars', title: '分类', path: '/info' },
-        { icon: 'tags', title: '标签', path: '/tags' }
-      ]
+      userName: sessionStorage.getItem('blogUser') || ''
     }
   }
   toggle = () => {
@@ -32,8 +27,12 @@ class App extends Component {
   handleClickMenuItem (item) {
     sessionStorage.setItem('menuItmeKey', String(item.key))
   }
+  handleClickDrop () {
+    console.log(11)
+    this.props.history.push('/login')
+  }
   menuItem = () => {
-    return this.state.menuList.map((item, index) => {
+    return routes.filter(item => item.menu).map((item, index) => {
       return (
       <Menu.Item key={ index } onClick={ item => this.handleClickMenuItem(item) }>
         <Link to={item.path}>
@@ -45,15 +44,18 @@ class App extends Component {
   }
   render() {
     const logoClass = this.state.collapsed ? 'logoMin' : 'logoMax'
+    const menu = (
+      <Menu onClick={ this.handleClickDrop.bind(this) }>
+        <Menu.Item key="1">login out</Menu.Item>
+      </Menu>
+    )
     return (
-      <BrowserRouter>
         <div>
           <Layout style={{minHeight: '100vh'}}>
             <Sider
               trigger={null}
               collapsible
-              collapsed={this.state.collapsed}
-            >
+              collapsed={this.state.collapsed}>
               <div className={logoClass} />
               <Menu theme="dark" mode="inline" defaultSelectedKeys={ [sessionStorage.getItem('menuItmeKey') || '0'] }>
                 { this.menuItem() }
@@ -66,9 +68,24 @@ class App extends Component {
                   type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                   onClick={this.toggle}
                 />
+                <span className='user'>
+                  <Avatar style={{ backgroundColor: '#f56a00' }}>{this.state.userName}</Avatar>
+                  <Dropdown overlay={menu} className='ml10'>
+                    <a href="#">
+                      <Icon type="down" />
+                    </a>
+                  </Dropdown>
+                </span>
               </Header>
               <Content className='content'>
-              { Routers }
+              {routes.map((route, i) => (
+                <Route
+                key={i}
+                excat={route.excat}
+                path={route.path}
+                component={route.component}
+              />
+              ))}
               </Content>
               <Footer style={{ textAlign: 'center' }}>
                 Created by Gong
@@ -76,8 +93,7 @@ class App extends Component {
             </Layout>
           </Layout>
         </div>
-      </BrowserRouter>
-    );
+    )
   }
 }
 

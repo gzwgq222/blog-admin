@@ -141,7 +141,7 @@ class articleList extends React.Component {
           <Button className='mr10' type="primary" htmlType="submit">
             search
           </Button>
-          <Link to='article-item'>
+          <Link to='/home/article-item'>
             <Button type='primary'>create</Button>
           </Link>
         </Form.Item>
