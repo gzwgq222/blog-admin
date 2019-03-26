@@ -1,7 +1,8 @@
 import Login from '../pages/admin/login'
-import Layout from '../pages/admin/layout'
-import layoutRouter from './layout'
+import adminLayout from '../pages/admin/layout'
 import webLayout from '../pages/web/layout'
+import adminRouter from './admin'
+import webRouter from './web'
 
 const routes = [
   {
@@ -11,12 +12,13 @@ const routes = [
   },
   {
     path: '/admin',
-    component: Layout,
-    routes: layoutRouter
+    component: adminLayout,
+    routes: adminRouter
   },
   {
     path: '/web',
-    component: webLayout
+    component: webLayout,
+    routes: webRouter
   }
 ]
 

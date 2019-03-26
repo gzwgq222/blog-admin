@@ -8,22 +8,29 @@ import {
 } from 'react-router-dom'
 import HeaderCustom from '../header'
 import SiderCustom from '../sider/siderCustom'
-
+import routes from '../../../Router/web'
 import './layout.css'
 const { Content, Footer } = Layout
+
 class Index extends Component {
+  constructor(props) {
+    // es6继承必须用super调用父类的constructor
+    super(props)
+    this.state = {}
+  }
+  componentDidMount () {}
   render() {
     const contentHeight = document.body.clientHeight - 64 -62
     return (
       <Layout className="wrapper">
-        <HeaderCustom></HeaderCustom>
+        <HeaderCustom {...this.props}></HeaderCustom>
         <Layout className="wrapper-container">
           <Layout className="wrapper-content">
             <Content
               style={{ padding: 24, margin: 0, minHeight: contentHeight, height: '100%', overflow: 'initial'}}
             >
             <Col
-              lg={{ span: 6, offset: 1 }}
+              lg={{ span: 5, offset: 1 }}
               md={{ span: 6, offset: 1 }}
               xs={{ span: 0 }}
             >
@@ -35,9 +42,7 @@ class Index extends Component {
               xs={{ span: 24 }}
               className="about-wrapper"
             >
-              Gong
-            </Col>
-              {/* {
+              {
                 routes.map(({ path, key, component, ...props }) => (
                   <Route key={key}
                     exact
@@ -46,12 +51,11 @@ class Index extends Component {
                     {...props}
                   />
                 ))
-              } */}
+              }
+            </Col>
             </Content>
           </Layout>
-          <Footer
-            style={{textAlign: 'center'}}
-          >
+          <Footer style={{textAlign: 'center'}}>
             Copyright © Gong 2019
           </Footer>
         </Layout>

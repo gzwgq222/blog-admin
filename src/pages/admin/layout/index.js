@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { Layout, Menu, Icon, Avatar, Dropdown } from 'antd'
-import routes from '../../../Router/layout'
+import routes from '../../../Router/admin'
 import './index.less'
 
 const { Header, Sider, Content, Footer } = Layout

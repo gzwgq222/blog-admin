@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-        <Route exact path="/" render={() => <Redirect to="/web" push />} />
+        <Route exact path="/" render={() => <Redirect to="/web/index" push />} />
         {routes.map((route, i) => (
           <Route
           key={i}

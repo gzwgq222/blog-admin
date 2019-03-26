@@ -7,10 +7,10 @@ const renderMenuItem =
             key={key || link}
             {...props}
         >
-            {/* <Link to={link || key}> */}
+            <Link to={link || key}>
                 {icon && <Icon type={icon} />}
                 <span className="nav-text">{title}</span>
-            {/* </Link> */}
+            </Link>
         </Menu.Item>
 
 const renderSubMenu =

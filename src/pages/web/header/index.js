@@ -24,14 +24,17 @@ class HeaderCustom extends Component {
     }
     this.menuClick = this.menuClick.bind(this)
     this.showLoginModal = this.showLoginModal.bind(this)
-    this.showRegisterModal = this.showRegisterModal.bind(this)
     this.handleLoginCancel = this.handleLoginCancel.bind(this)
     this.handleRegisterCancel = this.handleRegisterCancel.bind(this)
   }
+  componentDidMount () {
+    console.log(111, this.props)
+  }
   showLoginModal() {
-    this.setState({
-      login: true
-    })
+    // this.setState({
+    //   login: true
+    // })
+    this.props.history.push('/login')
   }
   showRegisterModal() {
     this.setState({
@@ -119,7 +122,7 @@ class HeaderCustom extends Component {
                 ghost 
                 type="danger" 
                 size="small"
-                onClick={this.showRegisterModal}
+                onClick={this.showRegisterModal.bind(this)}
               >
                 注册
               </Button>
