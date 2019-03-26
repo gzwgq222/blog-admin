@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { 
   Layout,
-  Col
+  Col,
+  BackTop
 } from 'antd'
 import {
   Route
@@ -26,33 +27,32 @@ class Index extends Component {
         <HeaderCustom {...this.props}></HeaderCustom>
         <Layout className="wrapper-container">
           <Layout className="wrapper-content">
-            <Content
-              style={{ padding: 24, margin: 0, minHeight: contentHeight, height: '100%', overflow: 'initial'}}
-            >
-            <Col
-              lg={{ span: 5, offset: 1 }}
-              md={{ span: 6, offset: 1 }}
-              xs={{ span: 0 }}
-            >
-              <SiderCustom />
-            </Col>
-            <Col
-              lg={{ span: 15, offset: 1 }}
-              md={{ span: 15, offset: 1 }}
-              xs={{ span: 24 }}
-              className="about-wrapper"
-            >
-              {
-                routes.map(({ path, key, component, ...props }) => (
-                  <Route key={key}
-                    exact
-                    path={path}
-                    component={component}
-                    {...props}
-                  />
-                ))
-              }
-            </Col>
+            <Content style={{ padding: 24, margin: 0, minHeight: contentHeight, height: '100%', overflow: 'initial'}}>
+              <Col
+                lg={{ span: 5, offset: 1 }}
+                md={{ span: 6, offset: 1 }}
+                xs={{ span: 0 }}
+              >
+                <SiderCustom />
+              </Col>
+              <Col
+                lg={{ span: 15, offset: 1 }}
+                md={{ span: 15, offset: 1 }}
+                xs={{ span: 24 }}
+                className="about-wrapper"
+              >
+                {
+                  routes.map(({ path, key, component, ...props }) => (
+                    <Route key={key}
+                      exact
+                      path={path}
+                      component={component}
+                      {...props}
+                    />
+                  ))
+                }
+              </Col>
+              <BackTop /> 
             </Content>
           </Layout>
           <Footer style={{textAlign: 'center'}}>

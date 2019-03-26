@@ -12,64 +12,42 @@ class About extends Component {
     return (
       <Card bordered={false}>
       <div className="content-inner-wrapper about">
-        <Divider orientation="left">博客简述</Divider>
-        {/* <p>主要是用来记录博主学习而作！</p> */}
-        <p>本博客使用的技术为 react v16.8 + antd + koa2 + mysql</p>
+        <Divider orientation="left">关于博客</Divider>
+        <p>一直在用 vue 写业务，用 react 的机会比较少，一直也想转 react，故选用了 react 这套技术栈</p>
+        <p>前端：react + antd + es6 + webpack + axios</p>
+        <p>服务端：koa2 + sequelize + mysql</p>
         <p>
-          源码地址：
           <a target="_blank" rel="noreferrer noopener" href="https://github.com/gzwgq222/blog-admin">
-            github
+            源码戳这里 ~
           </a>
         </p>
         <Divider orientation="left">关于我</Divider>
         <ul className="about-list">
-          <li>Gong</li>
-          <li>学历专业：本科 医学</li>
+          <li>Gong Qiang</li>
           <li>
             联系方式：
-            <Icon type="qq" /> 445722156
+            <a href="#">18174352598</a>
             <Divider type="vertical" />
             <i className="iconfont icon-email" />
             <a href="mailto:445722156@qq.com">445722156@qq.com</a>
           </li>
           <li>坐标：深圳市</li>
+          <li>学历专业：本科<Divider type="vertical" />医学</li>
           <li>
             技能
             <ul>
               <li>
-                HTML、CSS、Javascript：能熟练开发符合 W3C 标准的页面！
-                {/* <Rate defaultValue={3} disabled /> */}
+               前端：Vue、React、ES6/7/8
               </li>
               <li>
-                react vue 框架：熟练掌握使用！
-                {/* <Rate defaultValue={3} disabled /> */}
+                服务端：Node、Koa2、
               </li>
               <li>
-                es6：日常开发必备，以及掌握基本面向对象编程实现！
-                {/* <Rate defaultValue={3} disabled /> */}
+                数据库：Mysql
               </li>
               <li>
-                webpack: 入门级别，可以对脚手架进行针对性的配置！
-                {/* <Rate defaultValue={2} disabled /> */}
+                工具：webpack、git
               </li>
-              <li>
-                node mysql：针对需求可以做到简单的数据库设计、接口的开发与设计！
-                {/* <Rate defaultValue={2} disabled /> */}
-              </li>
-            </ul>
-          </li>
-          <li>
-            其他
-            <ul>
-              <li>常用开发工具： vscode、webstorm、git</li>
-              <li>熟悉的 UI 工具： antd、element-ui、vux</li>
-              <li>良好的代码习惯： 略微代码洁癖、注释规范 jsdoc</li>
-            </ul>
-          </li>
-          <li>
-            个人
-            <ul>
-              <li>以前吧骑行、跳舞，现在已很久没有动了~~~</li>
             </ul>
           </li>
         </ul>
