@@ -36,10 +36,7 @@ class articleList extends React.Component {
         },
         {
           title: 'Time',
-          dataIndex: 'createdAt',
-          render: createdAt => (
-            <span>{ createdAt.slice(0, 10) }</span>  
-          )
+          dataIndex: 'createdAt'
         },
         {
           title: 'Action',

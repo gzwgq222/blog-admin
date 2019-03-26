@@ -1,4 +1,4 @@
-import { Form, Input, Button, Select } from 'antd'
+import { Form, Input, Button, Select, message } from 'antd'
 import React from 'react'
 import { EditorState, convertToRaw, ContentState } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
@@ -15,6 +15,12 @@ class createArticle extends React.Component {
     this.state = {
       tag: [],
       category: [],
+      form: {
+        author: '',
+        title: '',
+        author: '',
+        author: '',
+      },
       editorState: EditorState.createEmpty()
     }
   }
@@ -29,11 +35,20 @@ class createArticle extends React.Component {
   }
   handleSubmit = (e) => {
     e.preventDefault()
-    const editorContent = draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))
-    console.log(editorContent)
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values)
+        const content = draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))
+        const params = {
+          ...values,
+          category: String(values.category),
+          tag: String(values.tag),
+          content
+        }
+        const {code, data} = await api.post('/article/create', params)
+        if (code === 1000) {
+          message.success('新增成功')
+          this.props.history.push('/admin/article')
+        }
       } 
     })
   }
@@ -85,25 +100,11 @@ class createArticle extends React.Component {
             <Input placeholder="请输入作者" />
           )}
         </Form.Item>
-        <Form.Item label='关键字'>
-          {getFieldDecorator('keyword', {
-            rules: [{ required: true, message: '请输入关键字' }],
-          })(
-            <Input placeholder="请输入关键字" />
-          )}
-        </Form.Item>
         <Form.Item label='描述'>
           {getFieldDecorator('desc', {
             rules: [{ required: true, message: '请输入描述' }],
           })(
             <Input placeholder="请输入描述" />
-          )}
-        </Form.Item>
-        <Form.Item label='封面链接'>
-          {getFieldDecorator('img_url', {
-            rules: [{ required: true, message: '请输入封面链接' }],
-          })(
-            <Input placeholder="请输入封面链接" />
           )}
         </Form.Item>
         <Form.Item label='分类'>

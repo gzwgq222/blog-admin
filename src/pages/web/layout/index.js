@@ -19,7 +19,9 @@ class Index extends Component {
     super(props)
     this.state = {}
   }
-  componentDidMount () {}
+  componentDidMount () {
+    document.title = 'Blog-web'
+  }
   render() {
     const contentHeight = document.body.clientHeight - 64 -62
     return (

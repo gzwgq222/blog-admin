@@ -19,7 +19,9 @@ class articleList extends React.Component {
         {
           title: 'Index',
           dataIndex: 'index',
-          key: 'index'
+          key: 'index',
+          width: 80,
+          align: 'center'
         },
         {
           title: 'Title',
@@ -27,8 +29,8 @@ class articleList extends React.Component {
           key: 'title'
         },
         {
-          title: 'Key',
-          dataIndex: 'keywaorld',
+          title: 'Author',
+          dataIndex: 'author',
           key: 'keywaorld',
         },
         // {
@@ -49,8 +51,8 @@ class articleList extends React.Component {
         // },
         {
           title: 'Category',
-          dataIndex: 'classify',
-          key: 'classify',
+          dataIndex: 'category',
+          key: 'category',
         },
         {
           title: 'State',
@@ -60,10 +62,7 @@ class articleList extends React.Component {
         {
           title: 'CreatedTime',
           dataIndex: 'createdAt',
-          key: 'createdAt',
-          render: createdAt => (
-            <div>{createdAt.slice(0, 10)}</div>
-          )
+          key: 'createdAt'
         }
       ]
     }
@@ -79,7 +78,11 @@ class articleList extends React.Component {
   }
   async getList () {
     this.setState({loading: true})
-    const {data } = await api.get('/list')
+    const params = {
+      pageNo: this.state.pageNo,
+      pageSize: this.state.pageSize
+    }
+    const {data } = await api.get('/article/list', params)
     data.forEach((item, index) => {
       item.index = this.state.pageSize * (this.state.pageNo - 1) + index + 1
     })

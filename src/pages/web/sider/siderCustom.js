@@ -31,9 +31,7 @@ class SiderCustom extends Component {
       <div className="sider-container">
         <div className="admin-info">
           <header>
-          <Tooltip placement="top" title='我叫路飞，要成为海贼王的男人'>
-            <img src={avatar} alt="avatar"/>
-            </Tooltip>
+            <img src={avatar} alt="avatar" title='我叫路飞，要成为海贼王的男人'/>
           </header>
           <p className="admin-name">
             牧羊人

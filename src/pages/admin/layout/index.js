@@ -23,7 +23,9 @@ class App extends Component {
       collapsed: !this.state.collapsed,
     });
   }
-  async componentDidMount () {}
+  async componentDidMount () {
+    document.title = 'Blog-admin'
+  }
   handleClickMenuItem (item) {
     sessionStorage.setItem('menuItmeKey', String(item.key))
   }

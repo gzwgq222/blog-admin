@@ -12,20 +12,24 @@ class About extends Component {
     return (
       <Card bordered={false}>
       <div className="content-inner-wrapper about">
-        <Divider orientation="left">关于博客</Divider>
-        <p>一直在用 vue 写业务，用 react 的机会比较少，一直也想转 react，故选用了 react 这套技术栈</p>
-        <p>前端：react + antd + es6 + webpack + axios</p>
-        <p>服务端：koa2 + sequelize + mysql</p>
+        <Divider orientation="left">Blog</Divider>
+        {/* <p>一直在用 vue 写业务，用 react 的机会比较少，一直也想转 react，故选用了 react 这套技术栈</p> */}
+        <p>前端：react + antd + react-router + es6 + webpack + axios</p>
+        <p>服务端：koa2 + mysql + sequelize</p>
         <p>
           <a target="_blank" rel="noreferrer noopener" href="https://github.com/gzwgq222/blog-admin">
             源码戳这里 ~
           </a>
         </p>
-        <Divider orientation="left">关于我</Divider>
+        <Divider orientation="left">Me</Divider>
         <ul className="about-list">
           <li>Gong Qiang</li>
           <li>
             联系方式：
+            <a target="_blank" rel="noreferrer noopener" href="https://github.com/gzwgq222">
+              <Icon type="github" style={{fontSize: '20px'}}/>
+            </a>
+            <Divider type="vertical" />
             <a href="#">18174352598</a>
             <Divider type="vertical" />
             <i className="iconfont icon-email" />
