@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import api from '../../../api'
 import {
   // message,
   List,
@@ -11,17 +12,34 @@ class Collect extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: '',
-      currentPage: 1,
-      totalElements: 0
+      data: [],
+      pageNo: 1,
+      pageSize: 10,
+      total: 0
     }
+  }
+  componentDidMount () {
+    this.getList()
+  }
+  async getList () {
+    const params = {
+      title: '',
+      pageNo: this.state.pageNo,
+      pageSize: this.state.pageSize
+    }
+    const {data, total } = await api.get('star/list', params)
+    console.log(222, data)
+    this.setState({
+      data,
+      total
+      })
   }
   render() {
     const pagination = {
       pageSize: 10,
       size: 'small',
-      current: this.state.currentPage,
-      total: this.state.totalElements,
+      current: this.state.pageNo,
+      total: this.state.total,
       // onChange: ((page, pageSize) => {
       //   this.setState({
       //     currentPage: page
@@ -35,23 +53,10 @@ class Collect extends Component {
           header={<div className="star-header">文章收藏</div>}
           itemLayout="vertical"
           pagination={pagination}
-          dataSource={this.state.data.rows}
+          dataSource={this.state.data}
           renderItem={item => (
-            <List.Item
-              key={item.title}
-              extra={item.date}
-            >
-              <List.Item.Meta
-                description={[<a key={item.link} href={item.link}>{item.title}</a>, 
-                  <Tag
-                    key={item.id}
-                    className="star-author"
-                    color={color[Math.floor(Math.random()*color.length)]}
-                  >
-                    {item.author}
-                  </Tag>
-                ]}
-              />
+            <List.Item key={item.id} extra={item.date} >
+              <List.Item.Meta description={[<a key={item.url} href={item.url} target='_blank'>{item.title}</a>]}/>
             </List.Item>
           )}
         />
