@@ -17,21 +17,27 @@ class articleList extends React.Component {
       pageSize: 10,
       columns: [
         {
-          title: 'Index',
+          title: 'index',
           dataIndex: 'index',
           key: 'index',
           width: 80,
           align: 'center'
         },
         {
-          title: 'Title',
+          title: 'title',
           dataIndex: 'title',
           key: 'title'
         },
         {
-          title: 'Author',
+          title: 'author',
           dataIndex: 'author',
           key: 'keywaorld',
+        },
+        {
+          title: 'desc',
+          dataIndex: 'desc',
+          key: 'desc',
+          width: 400
         },
         // {
         //   title: '标签',
@@ -50,32 +56,49 @@ class articleList extends React.Component {
         //   ),
         // },
         {
-          title: 'Category',
+          title: 'category',
           dataIndex: 'category',
           key: 'category',
         },
         {
-          title: 'State',
+          title: 'state',
           dataIndex: 'state',
           key: 'state',
         },
         {
-          title: 'CreatedTime',
+          title: 'time',
           dataIndex: 'createdAt',
           key: 'createdAt'
+        },
+        {
+          title: 'action',
+          align: 'center',
+          width: 180,
+          render: record => (
+            <span>
+              <Button ghost type='primary' className='mr10' onClick={this.handleEdit.bind(this)}>edit</Button>
+              <Button ghost type='danger' onClick={this.handleDelete.bind(this, record.id)}>delete</Button>
+            </span> 
+          )
         }
       ]
     }
   }
 
-  handleClick () {
-    console.log(this)
-  }
+
   componentDidMount() {
     // To disabled submit button at the beginning.
     // this.props.form.validateFields();
     this.getList()
   }
+  async handleDelete (id) {
+    const {code} = await api.post('article/destroy', {id})
+    if (code === 1000) {
+      message.success('删除成功')
+      this.getList()
+    }
+  }
+  handleEdit () {}
   async getList () {
     this.setState({loading: true})
     const params = {

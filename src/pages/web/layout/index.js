@@ -38,14 +38,14 @@ class Index extends Component {
                 <SiderCustom />
               </Col>
               <Col
-                lg={{ span: 15, offset: 1 }}
-                md={{ span: 15, offset: 1 }}
+                lg={{ span: 16, offset: 1 }}
+                md={{ span: 16, offset: 1 }}
                 xs={{ span: 24 }}
                 className="about-wrapper"
               >
                 {
-                  routes.map(({ path, key, component, ...props }) => (
-                    <Route key={key}
+                  routes.map(({ path, key, component, ...props }, index) => (
+                    <Route key={index}
                       exact
                       path={path}
                       component={component}

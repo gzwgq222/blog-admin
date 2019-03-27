@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './index.less'
 
-import { Divider, Rate, Icon, Card } from 'antd'
+import { Divider, Icon, Card } from 'antd'
 
 
 class About extends Component {

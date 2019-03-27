@@ -4,8 +4,6 @@ import {
   Card,
   Tag,
   Divider,
-  Tooltip,
-  Icon
 } from 'antd'
 import './sider.less'
 import api from '../../../api'
@@ -15,18 +13,30 @@ class SiderCustom extends Component {
   constructor() {
     super()
     this.state = {
-      tags: []
+      tags: [],
+      articleData: []
     }
     this.getTags = this.getTags.bind(this)
   }
   componentDidMount() {
     this.getTags()
+    this.getArticleList()
+  }
+  async getArticleList () {
+    const { data, code } = await api.get('/article/list', {pageNo:1, pageSize: 5})
+    code === 1000 && this.setState({articleData: data})
+    console.log(this.state.articleData)
   }
   async getTags () {
     const {data, code} = await api.get('tag/list/all')
     code === 1000 && this.setState({tags: data})
    }
   render() {
+    const list = this.state.articleData.map(v => (
+      <li key={v.id} onClick={() => this.props.history.push(`/app/blog/desc/${v.id}`)}>
+        {v.title}
+      </li>
+    ))
     return (
       <div className="sider-container">
         <div className="admin-info">
@@ -45,18 +55,9 @@ class SiderCustom extends Component {
         <div className="recent-article">
           <Card bordered={false}>
             <Divider orientation="left">最近文章</Divider>
-            {/* {
-              this.props.content ? <ul className="recent-list">
-                {
-                  this.props.content.map(v => (
-                      <li key={v.id} onClick={() => this.props.history.push(`/app/blog/desc/${v.id}`)}>
-                        {v.title}
-                      </li>
-                  ))
-                }
-              </ul>
-              : null
-            } */}
+            <ul className="recent-list">
+              { list }
+            </ul>
           </Card>
         </div>
         <div className="tags-wrapper">

@@ -1,5 +1,6 @@
 import React from 'react'
-import { color } from '../../../utils'
+// import formDate from '../../until/formDate'
+// Tag
 import { Table, Form, Input, Button, message, Modal, Tag } from 'antd';
 import api from '../../../api'
 
@@ -12,8 +13,9 @@ class articleList extends React.Component {
     this.state = {
       loading: false,
       visible: false,
-      tag: '',
-      name: '',
+      title: '',
+      url: '',
+      title: '',
       pageNo: 1,
       pageSize: 10,
       total: null,
@@ -27,18 +29,15 @@ class articleList extends React.Component {
           align: 'center'
         },
         {
-          title: 'category',
-          dataIndex: 'name',
-          render: name => (
-            <Tag color={color[Math.floor(Math.random()*color.length)]}>{ name }</Tag>
-          )
+          title: 'title',
+          dataIndex: 'title'
         },
         {
           title: 'time',
           dataIndex: 'createdAt'
         },
         {
-          title: 'action',
+          title: 'Action',
           key: 'action',
           width: 120,
           align: 'center',
@@ -52,7 +51,7 @@ class articleList extends React.Component {
     }
   }
   async handleClick (record) {
-    await api.post('category/destroy', {id: record.id})
+    await api.post('star/destroy', {id: record.id})
     message.success('删除成功')
     this.getList()
   }
@@ -64,11 +63,11 @@ class articleList extends React.Component {
   async getList () {
     this.setState({loading: true})
     const params = {
-      name: this.state.name,
+      title: this.state.title,
       pageNo: this.state.pageNo,
       pageSize: this.state.pageSize
     }
-    const {data, total } = await api.get('category/list', params)
+    const {data, total } = await api.get('star/list', params)
     data.forEach((item, index) => {
       item.index = this.state.pageSize * (this.state.pageNo - 1) + index + 1
     })
@@ -85,21 +84,26 @@ class articleList extends React.Component {
       if (!err) {
         await this.setState({
           pageNo: 1,
-          name: values.name || ''
+          title: values.title || ''
         })
         this.getList()
       }
     });
   }
-  handdleChange (e) {
-    this.setState({tag: e.target.value})
+  handdleChange (e, name) {
+    console.log(name)
+    this.setState({
+      [name]: e.target.value
+    })
   }
   // 新增
   async handleOk () {
-    const {code, data} = await api.post('category/create', {name: this.state.tag})
+    const {url, title} = this.state
+    const {code, data} = await api.post('star/create', {title, url})
     this.setState({
       visible: false,
-      tag: ''
+      title: '',
+      url: ''
     })
     if (code === 1000) message.success('新增成功！')
     else message.error(data)
@@ -121,16 +125,17 @@ class articleList extends React.Component {
     return (
       <div>
         <Modal
-          title="分类"
+          title="标签"
           visible={ this.state.visible }
           onOk={this.handleOk.bind(this)}
           onCancel={ this.handleCancel.bind(this) }>
-          <Input placeholder="请输入分类名" value={ this.state.tag } onChange={ e => this.handdleChange(e) } />
+          <Input placeholder="请输入标题" value={ this.state.title } onChange={ e => this.handdleChange(e, 'title') } />
+          <Input placeholder="请输入链接" value={ this.state.url } onChange={ e => this.handdleChange(e, 'url') } style={{marginTop: '10px'}} />
         </Modal>
         <Form layout="inline" onSubmit={this.handleSubmit}>
           <Form.Item>
-          {getFieldDecorator('name')(
-            <Input placeholder="请输入分类名" allowClear={true} />
+          {getFieldDecorator('title')(
+            <Input placeholder="请输入标题" allowClear={true} />
           )}
           </Form.Item>
           <Form.Item>

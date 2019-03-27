@@ -1,6 +1,6 @@
 import { Form, Input, Button, Select, message } from 'antd'
 import React from 'react'
-import { EditorState, convertToRaw, ContentState } from 'draft-js'
+import { EditorState, convertToRaw } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import draftToHtml from 'draftjs-to-html'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
@@ -18,8 +18,6 @@ class createArticle extends React.Component {
       form: {
         author: '',
         title: '',
-        author: '',
-        author: '',
       },
       editorState: EditorState.createEmpty()
     }
@@ -44,7 +42,7 @@ class createArticle extends React.Component {
           tag: String(values.tag),
           content
         }
-        const {code, data} = await api.post('/article/create', params)
+        const {code} = await api.post('/article/create', params)
         if (code === 1000) {
           message.success('新增成功')
           this.props.history.push('/admin/article')
@@ -78,10 +76,10 @@ class createArticle extends React.Component {
     }
     const { getFieldDecorator } = this.props.form
     let categoryOption = this.state.category.map(category => {
-      return <Option value={category.id} key={category.id}>{category.name}</Option>
+      return <Option value={category.name} key={category.name}>{category.name}</Option>
     })
     let tagOption = this.state.tag.map(tag => {
-      return <Option value={tag.id} key={tag.id}>{tag.name}</Option>
+      return <Option value={tag.name} key={tag.name}>{tag.name}</Option>
     })
 
     return (

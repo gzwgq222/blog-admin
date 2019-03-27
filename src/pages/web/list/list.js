@@ -66,7 +66,7 @@ class BlogList extends Component {
               [ 
                 <IconText type="message" text={item.commentSize} />,
                 <IconText type="tags-o" text={
-                  item.tag.split(',').map(v => (
+                  item.tag.map(v => (
                     <Tag
                       key={item + Math.random()}
                       color={color[Math.floor(Math.random()*color.length)]}
@@ -74,17 +74,19 @@ class BlogList extends Component {
                     >
                       {v}
                     </Tag>
-                ))
+                  ))
                 } />,
                 item.category ?
                 <IconText type="folder" text={
-                  <Tag
-                    color="orange"
-                    key={item.category}
-                    onClick={()=>this.props.history.push(`/app/catalog/${item.catalog.id}`)}
-                  >
-                    {item.category}
-                  </Tag>
+                  item.category.map(v => (
+                    <Tag
+                      key={item + Math.random()}
+                      color={color[Math.floor(Math.random()*color.length)]}
+                      onClick={()=>this.props.history.push(`/app/tags/${v}`)}
+                    >
+                      {v}
+                    </Tag>
+                  ))
                 }/> : null
               ]}
               extra={[

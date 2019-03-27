@@ -1,4 +1,5 @@
 import Tags from '../pages/admin/tags'
+import Star from '../pages/admin/star'
 import Home from '../pages/admin/home'
 import Category from '../pages/admin/category'
 import Article from '../pages/admin/article'
@@ -32,6 +33,13 @@ const routes = [
     title: '分类',
     path: '/admin/category',
     component: Category
+  },
+  {
+    menu: true,
+    icon: 'star',
+    title: '收藏',
+    path: '/admin/star',
+    component: Star
   },
   {
     icon: 'edit',

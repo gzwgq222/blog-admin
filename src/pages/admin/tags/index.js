@@ -1,6 +1,5 @@
 import React from 'react'
-// import formDate from '../../until/formDate'
-// Tag
+import { color } from '../../../utils'
 import { Table, Form, Input, Button, message, Modal, Tag } from 'antd';
 import api from '../../../api'
 
@@ -21,25 +20,25 @@ class articleList extends React.Component {
       data: [],
       columns: [
         {
-          title: 'Index',
+          title: 'index',
           dataIndex: 'index',
           key: 'index',
           width: 80,
           align: 'center'
         },
         {
-          title: 'Tag',
+          title: 'tag',
           dataIndex: 'name',
           render: name => (
-            <Tag color='cyan'>{ name }</Tag>
+            <Tag color={color[Math.floor(Math.random()*color.length)]}>{ name }</Tag>
           )
         },
         {
-          title: 'Time',
+          title: 'time',
           dataIndex: 'createdAt'
         },
         {
-          title: 'Action',
+          title: 'action',
           key: 'action',
           width: 120,
           align: 'center',

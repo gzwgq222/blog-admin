@@ -1,25 +1,32 @@
 import List from '../pages/web/list/list'
 import Archive from '../pages/web/archive'
 import About from '../pages/web/about'
+import Star from '../pages/web/star'
 
 const webRoutes = [
   {
     icon: 'home',
     title: '首页',
     path: '/web/index',
-   component: List
+    component: List
   },
   {
-    icon: 'home',
+    icon: 'edit',
     title: '归档',
     path: '/web/archive',
-   component: Archive
+    component: Archive
   },
   {
-    icon: 'home',
-    title: '归档',
+    icon: 'star',
+    title: '收藏',
+    path: '/web/star',
+    component: Star
+  },
+  {
+    icon: 'team',
+    title: '关于',
     path: '/web/about',
-   component: About
+    component: About
   }
 ]
 
