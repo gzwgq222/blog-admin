@@ -25,6 +25,7 @@ class Index extends Component {
   render() {
     const contentHeight = document.body.clientHeight - 64 -62
     return (
+      <div>
       <Layout className="wrapper">
         <HeaderCustom {...this.props}></HeaderCustom>
         <Layout className="wrapper-container">
@@ -54,7 +55,6 @@ class Index extends Component {
                   ))
                 }
               </Col>
-              <BackTop /> 
             </Content>
           </Layout>
           <Footer style={{textAlign: 'center'}}>
@@ -62,6 +62,8 @@ class Index extends Component {
           </Footer>
         </Layout>
       </Layout>
+      <BackTop visibilityHeight='100' />
+      </div>
     )
   }
 }

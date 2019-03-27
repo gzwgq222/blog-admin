@@ -43,8 +43,14 @@ const routes = [
   },
   {
     icon: 'edit',
+    title: '新增文章',
+    path: '/admin/article-add',
+    component: ArticleItem
+  },
+  {
+    icon: 'edit',
     title: '文章详情',
-    path: '/admin/article-item',
+    path: '/admin/article-edit/:id',
     component: ArticleItem
   }
 ]

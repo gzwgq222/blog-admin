@@ -26,9 +26,7 @@ class HeaderCustom extends Component {
     this.handleLoginCancel = this.handleLoginCancel.bind(this)
     this.handleRegisterCancel = this.handleRegisterCancel.bind(this)
   }
-  componentDidMount () {
-    console.log(111, this.props)
-  }
+  componentDidMount () {}
   showLoginModal() {
     // this.setState({
     //   login: true
@@ -66,6 +64,8 @@ class HeaderCustom extends Component {
         </Menu.Item>
       </Menu>
     )
+    
+    const menuList = menus.filter(v => v.menu)
     return (
       <Header className="header-container">
         <Row>
@@ -73,7 +73,7 @@ class HeaderCustom extends Component {
             <div className="logo"><Icon type="smile" theme="twoTone" /> 牧羊人的博客</div>
           </Col>
           <Col lg={{span: 14}} md={{span: 14}} xs={{span: 0}}>
-            <Navigate menus={menus} />
+            <Navigate menus={menuList} />
           </Col>
           <Col lg={{span: 0}} md={{span: 0}} xs={{span: 10}} className="drop-down">
              <Dropdown overlay={navigator} trigger={['click']}>

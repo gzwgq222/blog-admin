@@ -1,12 +1,7 @@
 import React from 'react'
-// import formDate from '../../until/formDate'
-// Tag
-import { Table, Form, Input, Button, message, Modal, Tag } from 'antd';
+import { Table, Form, Input, Button, message, Modal } from 'antd';
 import api from '../../../api'
 
-// function hasErrors(fieldsError) {
-//   return Object.keys(fieldsError).some(field => fieldsError[field]);
-// }
 class articleList extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +10,6 @@ class articleList extends React.Component {
       visible: false,
       title: '',
       url: '',
-      title: '',
       pageNo: 1,
       pageSize: 10,
       total: null,

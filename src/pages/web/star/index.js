@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import api from '../../../api'
 import {
-  // message,
   List,
-  Tag
 } from 'antd'
-import { color } from '../../../utils'
 import './index.less'
 
 class Collect extends Component {
@@ -28,7 +25,6 @@ class Collect extends Component {
       pageSize: this.state.pageSize
     }
     const {data, total } = await api.get('star/list', params)
-    console.log(222, data)
     this.setState({
       data,
       total

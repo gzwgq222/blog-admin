@@ -4,10 +4,9 @@
   margin-bottom: 10px;
 }
 .ant-list-item .ant-list-item-meta-title {
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-size: 1.2rem;
   line-height: 1.2;
-  color: #2e3135;
+  /* color: #2e3135; */
 }
 .read-all {
   display: flex;

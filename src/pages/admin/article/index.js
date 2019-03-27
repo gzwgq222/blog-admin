@@ -1,17 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-// Tag
-import { Table, Form, Icon, Input, Button, message } from 'antd';
+import { color } from '../../../utils'
+import { Table, Form, Input, Button, message, Tag } from 'antd';
 import api from '../../../api'
 
-// function hasErrors(fieldsError) {
-//   return Object.keys(fieldsError).some(field => fieldsError[field]);
-// }
 class articleList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
+      title: '',
       data: [],
       pageNo: 1,
       pageSize: 10,
@@ -39,26 +37,13 @@ class articleList extends React.Component {
           key: 'desc',
           width: 400
         },
-        // {
-        //   title: '标签',
-        //   key: 'tags',
-        //   dataIndex: 'tags',
-        //   render: tags => (
-        //     <span>
-        //       {tags.map(tag => {
-        //         let color = tag.length > 5 ? 'geekblue' : 'green';
-        //         if (tag === 'loser') {
-        //           color = 'volcano';
-        //         }
-        //         return <Tag color={color} key={tag}>{tag.toUpperCase()}</Tag>;
-        //       })}
-        //     </span>
-        //   ),
-        // },
         {
           title: 'category',
           dataIndex: 'category',
           key: 'category',
+          render: category => (
+            category.map((v, index) => <Tag key={index} color={color[Math.floor(Math.random()*color.length)]}>{ v }</Tag>)
+          )
         },
         {
           title: 'state',
@@ -76,7 +61,7 @@ class articleList extends React.Component {
           width: 180,
           render: record => (
             <span>
-              <Button ghost type='primary' className='mr10' onClick={this.handleEdit.bind(this)}>edit</Button>
+              <Button ghost type='primary' className='mr10' onClick={this.handleEdit.bind(this, record.id)}>edit</Button>
               <Button ghost type='danger' onClick={this.handleDelete.bind(this, record.id)}>delete</Button>
             </span> 
           )
@@ -87,8 +72,6 @@ class articleList extends React.Component {
 
 
   componentDidMount() {
-    // To disabled submit button at the beginning.
-    // this.props.form.validateFields();
     this.getList()
   }
   async handleDelete (id) {
@@ -98,10 +81,13 @@ class articleList extends React.Component {
       this.getList()
     }
   }
-  handleEdit () {}
+  handleEdit (id) {
+    this.props.history.push(`/admin/article-edit/${id}`)
+  }
   async getList () {
     this.setState({loading: true})
     const params = {
+      title: this.state.title,
       pageNo: this.state.pageNo,
       pageSize: this.state.pageSize
     }
@@ -119,55 +105,32 @@ class articleList extends React.Component {
     if (code === 200) this.getList()
   }
   handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.form.validateFields( async(err, values) => {
+    e.preventDefault()
+    this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values)
-        const { code } = await api.post('example/add', values)
-        if (code === 1000) {
-          message.success('新增成功！')
-          this.getList()
-        }
+        await this.setState({
+          pageNo: 1,
+          title: values.title || ''
+        })
+        this.getList()
       }
     });
   }
   render() {
-    // getFieldsError
-    const {
-      getFieldDecorator, getFieldError, isFieldTouched,
-    } = this.props.form
-    // disabled={hasErrors(getFieldsError())
-    // Only show error after a field is touched.
-    const userNameError = isFieldTouched('name') && getFieldError('name');
-    const passwordError = isFieldTouched('title') && getFieldError('title');
+    const {getFieldDecorator} = this.props.form
     return (
       <div>
         <Form layout="inline" onSubmit={this.handleSubmit}>
-          <Form.Item
-            validateStatus={userNameError ? 'error' : ''}
-            help={userNameError || ''}
-          >
-            {getFieldDecorator('name', {
-              rules: [{ required: true, message: '请输入作者名字!' }],
-            })(
-              <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="请输入作者名字" />
-            )}
-          </Form.Item>
-          <Form.Item
-            validateStatus={passwordError ? 'error' : ''}
-            help={passwordError || ''}
-          >
-            {getFieldDecorator('title', {
-              rules: [{ required: true, message: '请输入标题' }],
-            })(
-              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="请输入标题" />
+          <Form.Item>
+            {getFieldDecorator('title')(
+              <Input placeholder="请输入标题" allowClear={true} />
             )}
           </Form.Item>
           <Form.Item>
           <Button className='mr10' type="primary" htmlType="submit">
             search
           </Button>
-          <Link to='/admin/article-item'>
+          <Link to='/admin/article-add'>
             <Button type='primary'>create</Button>
           </Link>
         </Form.Item>

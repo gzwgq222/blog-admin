@@ -13,4 +13,22 @@
     margin-right: 6px;
     vertical-align: middle;
   }
+  .link {
+    position: relative;
+    text-decoration: none;
+    color: #121314;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 60%;
+      left: -0.1em;
+      right: -0.1em;
+      bottom: 0;
+      transition: top 200ms cubic-bezier(0, .8, .13, 1);
+      background-color: rgba(79,192,141,0.5);
+    }
+    &:hover:after {
+      top: 0%;
+    }
+  }
 }

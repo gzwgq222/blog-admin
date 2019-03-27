@@ -13,9 +13,8 @@ class BlogList extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      currentPage: 1,
       pageNo: 1,
-      pageSize: 10,
+      pageSize: 5,
       data: []
     }
   }
@@ -28,30 +27,30 @@ class BlogList extends Component {
       pageNo: this.state.pageNo,
       pageSize: this.state.pageSize
     }
-    const { data, code } = await api.get('/article/list', params)
-    data.forEach((item, index) => {
-      item.index = this.state.pageSize * (this.state.pageNo - 1) + index + 1
-    })
-    code === 1000 && this.setState({data})
+    const { data, code, total } = await api.get('/article/list', params)
+    if (code === 1000) {
+      this.setState({data, total})
+    }
   }
   render() {
     const pagination = {
-      pageSize: 5,
-      current: 1,
-      total: 10,
+      current: this.state.pageNo,
+      pageSize: this.state.pageSize,
+      total: this.state.total,
       size: 'small',
-      onChange: ((page, pageSize) => {
-        this.setState({
-          currentPage: page
-        })
+      onChange: (async page => {
+        await this.setState({pageNo: page})
+        this.getList()
       })
     }
+
     const IconText = ({ type, text }) => (
       <span>
         <Icon type={type} style={{ marginRight: 8 }} />
         {text}
       </span>
     )
+    
     return (
       <div className="list-wrapper">
         <List
@@ -64,7 +63,7 @@ class BlogList extends Component {
               key={index}
               actions={
               [ 
-                <IconText type="message" text={item.commentSize} />,
+                // <IconText type="message" text={item.commentSize} />,
                 <IconText type="tags-o" text={
                   item.tag.map(v => (
                     <Tag
@@ -94,10 +93,10 @@ class BlogList extends Component {
               ]}
             >
               <List.Item.Meta
-                className="list-item"
+                // className="list-item"
                 title={item.title}
                 description={item.desc}
-                onClick={()=>this.props.history.push(`/app/blog/desc/${item.id}`)}
+                onClick={()=>this.props.history.push(`/web/detail/${item.id}`)}
               />
             </List.Item>
           )}

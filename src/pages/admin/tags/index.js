@@ -125,16 +125,15 @@ class articleList extends React.Component {
           visible={ this.state.visible }
           onOk={this.handleOk.bind(this)}
           onCancel={ this.handleCancel.bind(this) }>
-          <Input placeholder="请输入标签名" value={ this.state.tag } onChange={ e => this.handdleChange(e) } />
+          <Input placeholder="请输入标签" value={ this.state.tag } onChange={ e => this.handdleChange(e) } />
         </Modal>
         <Form layout="inline" onSubmit={this.handleSubmit}>
           <Form.Item>
           {getFieldDecorator('name')(
-            <Input placeholder="请输入标签名" allowClear={true} />
+            <Input placeholder="请输入标签" allowClear={true} />
           )}
           </Form.Item>
           <Form.Item>
-            {/* htmlType="submit" */}
           <Button className='mr10' type="primary" htmlType="submit">search</Button>
           <Button type='primary' onClick={ _ => this.setState({visible: true}) }>create</Button>
         </Form.Item>

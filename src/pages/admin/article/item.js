@@ -1,8 +1,9 @@
 import { Form, Input, Button, Select, message } from 'antd'
 import React from 'react'
-import { EditorState, convertToRaw } from 'draft-js'
+import { EditorState, convertToRaw, ContentState } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import draftToHtml from 'draftjs-to-html'
+import htmlToDraft from 'html-to-draftjs'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import './item.less'
 import api from '../../../api'
@@ -13,6 +14,7 @@ class createArticle extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      id: '',
       tag: [],
       category: [],
       form: {
@@ -24,6 +26,20 @@ class createArticle extends React.Component {
   }
   componentDidMount () {
     this.getTagList()
+    this.getDetail()
+  }
+  async getDetail () {
+    const id = this.props.match.params.id
+    this.setState({id})
+    const {code, data} = await api.get('/article/item', {id})
+    const { title, author, desc, category, tag, content } = data
+    this.props.form.setFieldsValue({title, author, desc, category, tag})
+    const contentBlock = htmlToDraft(content)
+    if (contentBlock) {
+      const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks)
+      const editorState = EditorState.createWithContent(contentState)
+      this.setState({ editorState })
+    }
   }
   async getTagList () {
    const {data, code} = await api.get('tag/list/all')
@@ -62,6 +78,7 @@ class createArticle extends React.Component {
     })
   }
   render() {
+    const {title} = this.state
     const formItemLayout = {
       labelCol: {
         xs: { span: 8 },
@@ -81,7 +98,8 @@ class createArticle extends React.Component {
     let tagOption = this.state.tag.map(tag => {
       return <Option value={tag.name} key={tag.name}>{tag.name}</Option>
     })
-
+    const txt = this.state.id ? 'update' : 'create'
+    
     return (
       <Form onSubmit={this.handleSubmit} {...formItemLayout}>
         <Form.Item label='标题'>
@@ -142,7 +160,7 @@ class createArticle extends React.Component {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" className="login-form-button">
-            create
+            { txt }
           </Button>
         </Form.Item>
       </Form>

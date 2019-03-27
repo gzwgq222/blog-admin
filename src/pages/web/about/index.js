@@ -17,18 +17,29 @@ class About extends Component {
         <p>前端：react + antd + react-router + es6 + webpack + axios</p>
         <p>服务端：koa2 + mysql + sequelize</p>
         <p>
-          <a target="_blank" rel="noreferrer noopener" href="https://github.com/gzwgq222/blog-admin">
+          <a
+          target="_blank"
+          className='link'
+          rel="noreferrer noopener"
+          href="https://github.com/gzwgq222/blog-admin">
             源码戳这里 ~
           </a>
         </p>
         <Divider orientation="left">Me</Divider>
         <ul className="about-list">
-          <li>Gong Qiang</li>
+          <li>姓名: Gong Qiang</li>
           <li>
-            联系方式：
-            <a target="_blank" rel="noreferrer noopener" href="https://github.com/gzwgq222">
-              <Icon type="github" style={{fontSize: '20px'}}/>
+            <Icon type="github" style={{fontSize: '16px'}} />：
+            <a
+            target="_blank"
+            className='link'
+            rel="noreferrer noopener"
+            href="https://github.com/gzwgq222">
+              github
             </a>
+          </li>
+          <li>
+            联系方式: 
             <Divider type="vertical" />
             <a href="#">18174352598</a>
             <Divider type="vertical" />
@@ -38,7 +49,7 @@ class About extends Component {
           <li>坐标：深圳市</li>
           <li>学历专业：本科<Divider type="vertical" />医学</li>
           <li>
-            技能
+            skill: 
             <ul>
               <li>
                前端：Vue、React、ES6/7/8
