@@ -73,21 +73,19 @@ class App extends Component {
                 <span className='user'>
                   <Avatar style={{ backgroundColor: '#f56a00' }}>{this.state.userName}</Avatar>
                   <Dropdown overlay={menu} className='ml10'>
-                    <a href="#">
                       <Icon type="down" />
-                    </a>
                   </Dropdown>
                 </span>
               </Header>
               <Content className='content'>
-              {routes.map((route, i) => (
-                <Route
-                key={i}
-                excat={route.excat}
-                path={route.path}
-                component={route.component}
-              />
-              ))}
+                {routes.map((route, i) => (
+                  <Route
+                  key={i}
+                  excat={route.excat}
+                  path={route.path}
+                  component={route.component}
+                />
+                ))}
               </Content>
               <Footer style={{ textAlign: 'center' }}>
                 Created by Gong

@@ -41,7 +41,7 @@ class About extends Component {
           <li>
             联系方式: 
             <Divider type="vertical" />
-            <a href="#">18174352598</a>
+            <span>18174352598</span>
             <Divider type="vertical" />
             <i className="iconfont icon-email" />
             <a href="mailto:445722156@qq.com">445722156@qq.com</a>

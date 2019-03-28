@@ -4,11 +4,11 @@ import {
   Row,
   Col,
   Button,
-  Menu,
+  // Menu,
   Dropdown,
   Icon
 } from 'antd'
-import './header.css'
+import './index.less'
 import Navigate from '../menu'
 import menus from '../../../Router/web'
 const { Header } = Layout
@@ -55,15 +55,15 @@ class HeaderCustom extends Component {
     
   }
   render() {
-    const menu = (
-      <Menu>
-        <Menu.Item>
-          <span>
-            退出登录
-          </span>
-        </Menu.Item>
-      </Menu>
-    )
+    // const loginOut = (
+    //   <Menu>
+    //     <Menu.Item>
+    //       <span>
+    //         退出登录
+    //       </span>
+    //     </Menu.Item>
+    //   </Menu>
+    // )
     
     const menuList = menus.filter(v => v.menu)
     return (
@@ -97,7 +97,7 @@ class HeaderCustom extends Component {
             {/* <div className="user-info">
               <Dropdown
                 placement="bottomCenter"
-                overlay={menu}
+                overlay={loginOut}
               >
                 <Avatar
                   className="user-avatar"

@@ -32,9 +32,9 @@ class articleList extends React.Component {
           key: 'keywaorld',
         },
         {
-          title: 'desc',
-          dataIndex: 'desc',
-          key: 'desc',
+          title: 'summary',
+          dataIndex: 'summary',
+          key: 'summary',
           width: 400
         },
         {

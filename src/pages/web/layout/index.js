@@ -8,9 +8,10 @@ import {
   Route
 } from 'react-router-dom'
 import HeaderCustom from '../header'
-import SiderCustom from '../sider/siderCustom'
+import SiderCustom from '../sider'
 import routes from '../../../Router/web'
-import './layout.css'
+import './index.less'
+
 const { Content, Footer } = Layout
 
 class Index extends Component {
@@ -36,7 +37,7 @@ class Index extends Component {
                 md={{ span: 6, offset: 1 }}
                 xs={{ span: 0 }}
               >
-                <SiderCustom />
+                <SiderCustom {...this.props} />
               </Col>
               <Col
                 lg={{ span: 16, offset: 1 }}

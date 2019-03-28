@@ -52,7 +52,7 @@ class Collect extends Component {
           dataSource={this.state.data}
           renderItem={item => (
             <List.Item key={item.id} extra={item.date} >
-              <List.Item.Meta description={[<a key={item.url} href={item.url} target='_blank'>{item.title}</a>]}/>
+              <List.Item.Meta description={[<a key={item.url} href={item.url} target='_blank' rel="noopener noreferrer">{item.title}</a>]}/>
             </List.Item>
           )}
         />

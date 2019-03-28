@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { timetrans, color } from '../../../utils'
+import { color } from '../../../utils'
 import api from '../../../api'
 
 import { 
@@ -63,13 +63,13 @@ class BlogList extends Component {
               key={index}
               actions={
               [ 
-                // <IconText type="message" text={item.commentSize} />,
+                <IconText type="calendar" text={item.createdAt} />,
                 <IconText type="tags-o" text={
                   item.tag.map(v => (
                     <Tag
                       key={item + Math.random()}
                       color={color[Math.floor(Math.random()*color.length)]}
-                      onClick={()=>this.props.history.push(`/app/tags/${v}`)}
+                      // onClick={()=>this.props.history.push(`/app/tags/${v}`)}
                     >
                       {v}
                     </Tag>
@@ -80,8 +80,8 @@ class BlogList extends Component {
                   item.category.map(v => (
                     <Tag
                       key={item + Math.random()}
-                      color={color[Math.floor(Math.random()*color.length)]}
-                      onClick={()=>this.props.history.push(`/app/tags/${v}`)}
+                      color='green'
+                      // onClick={()=>this.props.history.push(`/app/tags/${v}`)}
                     >
                       {v}
                     </Tag>
@@ -89,13 +89,13 @@ class BlogList extends Component {
                 }/> : null
               ]}
               extra={[
-                timetrans(item.createdAt)
+                // timetrans(item.createdAt)
               ]}
             >
               <List.Item.Meta
                 // className="list-item"
                 title={item.title}
-                description={item.desc}
+                description={item.summary}
                 onClick={()=>this.props.history.push(`/web/detail/${item.id}`)}
               />
             </List.Item>

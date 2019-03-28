@@ -5,13 +5,13 @@ import {
   Tag,
   Divider,
 } from 'antd'
-import './sider.less'
+import './index.less'
 import api from '../../../api'
 import { color } from '../../../utils'
 
 class SiderCustom extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       tags: [],
       articleData: []
@@ -25,7 +25,6 @@ class SiderCustom extends Component {
   async getArticleList () {
     const { data, code } = await api.get('/article/list', {pageNo:1, pageSize: 5})
     code === 1000 && this.setState({articleData: data})
-    console.log(this.state.articleData)
   }
   async getTags () {
     const {data, code} = await api.get('tag/list/all')
@@ -33,7 +32,7 @@ class SiderCustom extends Component {
    }
   render() {
     const list = this.state.articleData.map(v => (
-      <li key={v.id} onClick={() => this.props.history.push(`/app/blog/desc/${v.id}`)}>
+      <li key={v.id} onClick={()=>this.props.history.push(`/web/detail/${v.id}`)}>
         {v.title}
       </li>
     ))
@@ -49,7 +48,7 @@ class SiderCustom extends Component {
           <p className="admin-desc">
             不爱骑行，不爱跳舞
             <br />
-            前端打杂人员，全村最靓的仔
+            前端摸鱼人员，全村最靓的仔
           </p>
         </div>
         <div className="recent-article">
@@ -69,7 +68,6 @@ class SiderCustom extends Component {
                   <Tag
                     key = {v.id}
                     color={color[Math.floor(Math.random()*color.length)]}
-                    // onClick={()=>this.props.history.push(`/app/tags/${v}`)}
                   >
                     {v.name}
                   </Tag>
