@@ -13,6 +13,27 @@
     margin-right: 6px;
     vertical-align: middle;
   }
+  @keyframes me {
+    0% {
+      background: yellow;
+    }
+    100% {
+      background: pink;
+    }
+  }
+  @-webkit-keyframes me {
+    0% {
+      background: yellow;
+    }
+    100% {
+      background: pink;
+    }
+  }
+  .code {
+    width: 70px;
+    position: relative;
+    animation: me 3s infinite ease-in-out alternate;
+  }
   .link {
     position: relative;
     text-decoration: none;

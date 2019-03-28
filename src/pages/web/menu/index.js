@@ -3,8 +3,8 @@ import { Menu, Icon } from 'antd'
 import { Link } from 'react-router-dom'
 
 const renderMenuItem =
-    ({ title, icon, path }) =>
-        <Menu.Item key={path} >
+    ({ title, icon, path }, i) =>
+        <Menu.Item key={i} onClick={ () => sessionStorage.setItem('webKey', String(i)) }>
             <Link to={path}>
                 {icon && <Icon type={icon} />}
                 <span className="nav-text">{title}</span>
@@ -12,9 +12,9 @@ const renderMenuItem =
         </Menu.Item>
 
 const renderSubMenu =
-    ({ title, icon, path, sub }) =>
+    ({ title, icon, path, sub }, i) =>
         <Menu.SubMenu
-            key={path}
+            key={i}
             title={
                 <span>
                     {icon && <Icon type={icon} />}
@@ -24,10 +24,11 @@ const renderSubMenu =
         >
             {sub && sub.map(item => renderMenuItem(item))}
         </Menu.SubMenu>
-
-export default ({ menus }) => <Menu mode="horizontal" defaultSelectedKeys={[menus[0].path]}>
+const key = sessionStorage.getItem('webKey') || '0'
+console.log('key', key)
+export default ({ menus }) => <Menu mode="horizontal" defaultSelectedKeys={[key]}>
     {menus && menus.map(
-        item => item.sub && item.sub.length ?
-            renderSubMenu(item) : renderMenuItem(item)
+        (item, i) => item.sub && item.sub.length ?
+            renderSubMenu(item, i) : renderMenuItem(item, i)
     )}
 </Menu>

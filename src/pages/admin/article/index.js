@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import { color } from '../../../utils'
 import { Table, Form, Input, Button, message, Tag } from 'antd';
 import api from '../../../api'

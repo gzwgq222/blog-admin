@@ -28,7 +28,9 @@ class Index extends Component {
     return (
       <div>
       <Layout className="wrapper">
+        
         <HeaderCustom {...this.props}></HeaderCustom>
+        
         <Layout className="wrapper-container">
           <Layout className="wrapper-content">
             <Content style={{ padding: 24, margin: 0, minHeight: contentHeight, height: '100%', overflow: 'initial'}}>

@@ -7,7 +7,7 @@ import {
   Icon,
   Tag
 } from 'antd'
-import './list.css'
+import './list.less'
 
 class BlogList extends Component {
   constructor (props) {

@@ -26,7 +26,6 @@ class HeaderCustom extends Component {
     this.handleLoginCancel = this.handleLoginCancel.bind(this)
     this.handleRegisterCancel = this.handleRegisterCancel.bind(this)
   }
-  componentDidMount () {}
   showLoginModal() {
     // this.setState({
     //   login: true
