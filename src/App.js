@@ -1,7 +1,8 @@
 // import api from './api'
 import React, { Component } from 'react';
 import {
-  BrowserRouter,
+  // BrowserRouter,
+  HashRouter,
   Route,
   Redirect
 } from 'react-router-dom';
@@ -10,7 +11,7 @@ import routes from './Router'
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div>
         <Route exact path="/" render={() => <Redirect to="/web/index" push />} />
         {/* <Route exact path="/web" render={() => <Redirect to="/web/index" push />} /> */}
@@ -24,7 +25,7 @@ class App extends Component {
          />
         ))}
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
