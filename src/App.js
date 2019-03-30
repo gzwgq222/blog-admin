@@ -1,8 +1,7 @@
 // import api from './api'
 import React, { Component } from 'react'
 import {
-  // BrowserRouter,
-  HashRouter,
+  BrowserRouter,
   Route,
   Redirect
 } from 'react-router-dom';
@@ -13,7 +12,7 @@ import Login from './pages/admin/login'
 class App extends Component {
   render() {
     return (
-      <HashRouter>
+      <BrowserRouter>
         <div>
         <Route exact path="/" render={() => <Redirect to="/web/index" push />} />
         <Route path='/login' component={Login} />
@@ -29,7 +28,7 @@ class App extends Component {
          />
         ))}
         </div>
-      </HashRouter>
+      </BrowserRouter>
     );
   }
 }
