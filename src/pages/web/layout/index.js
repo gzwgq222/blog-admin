@@ -16,12 +16,11 @@ const { Content, Footer } = Layout
 
 class Index extends Component {
   constructor(props) {
-    // es6继承必须用super调用父类的constructor
     super(props)
     this.state = {}
   }
   componentDidMount () {
-    document.title = 'Blog-web'
+    document.title = '牧羊人博客'
   }
   render() {
     const contentHeight = document.body.clientHeight - 64 -62
@@ -33,7 +32,7 @@ class Index extends Component {
         
         <Layout className="wrapper-container">
           <Layout className="wrapper-content">
-            <Content style={{ padding: 24, margin: 0, minHeight: contentHeight, height: '100%', overflow: 'initial'}}>
+            <Content style={{ paddingTop: 24, margin: 0, minHeight: contentHeight, height: '100%', overflow: 'initial'}}>
               <Col
                 lg={{ span: 5, offset: 1 }}
                 md={{ span: 6, offset: 1 }}

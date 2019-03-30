@@ -16,7 +16,6 @@ class SiderCustom extends Component {
       tags: [],
       articleData: []
     }
-    this.getTags = this.getTags.bind(this)
   }
   componentDidMount() {
     this.getTags()
@@ -30,9 +29,12 @@ class SiderCustom extends Component {
     const {data, code} = await api.get('tag/list/all')
     code === 1000 && this.setState({tags: data})
    }
+   handleDetail (id) {
+    this.props.history.push(`/web/detail/${id}`)
+  }
   render() {
     const list = this.state.articleData.map(v => (
-      <li key={v.id} onClick={()=>this.props.history.push(`/web/detail/${v.id}`)}>
+      <li key={v.id} onClick={ this.handleDetail.bind(this, v.id) }>
         {v.title}
       </li>
     ))

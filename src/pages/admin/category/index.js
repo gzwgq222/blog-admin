@@ -163,3 +163,4 @@ class articleList extends React.Component {
 const article = Form.create({ name: 'horizontal_login' })(articleList)
 
 export default article
+

@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Card, Tag, Icon } from 'antd'
+import { Card, Icon } from 'antd'
 import { EditorState, ContentState } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import htmlToDraft from 'html-to-draftjs'
 import api from '../../../api'
-import { color } from '../../../utils'
 import './detail.less'
 
 class ArticleDetail extends Component {
@@ -13,9 +12,7 @@ class ArticleDetail extends Component {
     this.state = {
       id: '',
       data: {
-        title: '',
-        tag: [],
-        category: []
+        title: ''
       },
       editorState: EditorState.createEmpty()
     }
@@ -41,22 +38,7 @@ class ArticleDetail extends Component {
   render () {
     const { data } = this.state
 
-    // const tag = data.tag.map(v => {
-    //   return <span key={v}>
-    //     <Tag color={color[Math.floor(Math.random()*color.length)]}>{ v }</Tag>
-    //   </span>
-    // })
-
-    // const category = data.category.map(v => {
-    //   return <span key={v}>
-    //     <Tag color={color[Math.floor(Math.random()*color.length)]}>{ v }</Tag>
-    //   </span>
-    // })
     const extra = <div className='content-extra'>
-      {/* <Icon type='tags-o' style={{ marginRight: 8 }} />
-      { tag }
-      <Icon type='folder' style={{ marginRight: 8 }} />
-      { category } */}
       <Icon type='calendar' style={{ marginRight: 8 }} />
       { data.createdAt }
       <Icon type="eye" style={{ marginRight: 8, marginLeft: 8 }} />

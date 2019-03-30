@@ -24,13 +24,12 @@ class App extends Component {
     });
   }
   async componentDidMount () {
-    document.title = 'Blog-admin'
+    document.title = 'admin'
   }
   handleClickMenuItem (item) {
     sessionStorage.setItem('menuItmeKey', String(item.key))
   }
   handleClickDrop () {
-    console.log(11)
     this.props.history.push('/login')
   }
   menuItem = () => {
