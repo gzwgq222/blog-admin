@@ -23,7 +23,7 @@ class App extends Component {
       collapsed: !this.state.collapsed,
     });
   }
-  async componentDidMount () {
+  componentDidMount () {
     document.title = 'admin'
   }
   handleClickMenuItem (item) {
