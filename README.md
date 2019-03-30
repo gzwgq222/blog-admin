@@ -1,14 +1,21 @@
 
 ## 博客前台、后台
 
-----
 [Create React App](https://github.com/facebook/create-react-app) 构建项目
 
-### `yarn start` 或 `npm start` 
+react + react-router + antd + es6 + axios + less
+
+运行
+```
+yarn start  // npm start
 
 localhost:3000
+```
+打包
+```
+yarn build  // npm build
+```
 
-### `yarn build` 或 `npm build`
 
 
 ### 实现功能
@@ -37,3 +44,19 @@ localhost:3000
 |时间|事件|
 |:---|:---|
 |2019/03/30|开发完毕 部署上线|
+
+### Links
+
+
+* [react](https://react.docschina.org/)
+
+* [react-router4](https://reacttraining.com/react-router/web/guides/quick-start)
+
+*  [antd](https://ant.design/docs/react/introduce-cn)
+
+*  [react-draft-wysiwyg 编辑器](https://github.com/jpuri/react-draft-wysiwyg)
+
+
+初尝 react，错误之处还望斧正
+
+如对你有帮助，望不吝Star
