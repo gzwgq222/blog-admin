@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Form, Icon, Input, Button, Card, message  } from 'antd';
 import Particles from 'reactparticles.js'
 import './index.less'
@@ -20,6 +19,7 @@ class login extends React.Component {
         if (code === 1000) {
           message.success(desc)
           sessionStorage.setItem('blogUser', data.name)
+          sessionStorage.setItem('menuItmeKey', '0')
           this.props.history.push('/admin/page')
         } else {
           message.error(desc)
@@ -50,7 +50,6 @@ class login extends React.Component {
               )}
             </Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button" block>Log in</Button>
-            <Link to='/web/index' style={{paddingTop: '12px', float: 'right'}}>to blog</Link>
           </Form>
         </Card>
       </div>

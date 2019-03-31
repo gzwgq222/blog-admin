@@ -76,19 +76,21 @@ class App extends Component {
                   </Dropdown>
                 </span>
               </Header>
-              <Content className='content'>
-                {routes.map((route, i) => (
-                  <Route
-                  key={i}
-                  excat={route.excat}
-                  path={route.path}
-                  component={route.component}
-                />
-                ))}
-              </Content>
-              <Footer style={{ textAlign: 'center' }}>
+              <div className='wrap-content'>
+                <Content className='content'>
+                  {routes.map((route, i) => (
+                    <Route
+                    key={i}
+                    excat={route.excat}
+                    path={route.path}
+                    component={route.component}
+                  />
+                  ))}
+                </Content>
+              </div>
+              {/* <Footer style={{ textAlign: 'center' }}>
                 Created by Gong
-              </Footer>
+              </Footer> */}
             </Layout>
           </Layout>
         </div>
