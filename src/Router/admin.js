@@ -1,9 +1,11 @@
-import Tags from '../pages/admin/tags'
-import Star from '../pages/admin/star'
-import Home from '../pages/admin/home'
-import Category from '../pages/admin/category'
-import Article from '../pages/admin/article'
-import ArticleItem from '../pages/admin/article/item'
+import loadable from '../utils/loadable'
+
+const Tags = loadable(()=>import('../pages/admin/tags'))
+const Star = loadable(()=>import('../pages/admin/star'))
+const Home = loadable(()=>import('../pages/admin/home'))
+const Category = loadable(()=>import('../pages/admin/category'))
+const Article = loadable(()=>import('../pages/admin/article'))
+const ArticleItem = loadable(()=>import('../pages/admin/article/item'))
 
 const routes = [
   {

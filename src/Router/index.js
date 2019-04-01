@@ -1,5 +1,7 @@
-import adminLayout from '../pages/admin/layout'
-import webLayout from '../pages/web/layout'
+import loadable from '../utils/loadable'
+
+const adminLayout = loadable(()=>import('../pages/admin/layout'))
+const webLayout = loadable(()=>import('../pages/web/layout'))
 
 const routes = [
   {

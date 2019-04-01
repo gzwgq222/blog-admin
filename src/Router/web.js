@@ -1,8 +1,10 @@
-import List from '../pages/web/list/list'
-import ArticleDetail from '../pages/web/list/detail'
-import Archive from '../pages/web/archive'
-import About from '../pages/web/about'
-import Star from '../pages/web/star'
+import loadable from '../utils/loadable'
+
+const List = loadable(()=>import('../pages/web/list/list'))
+const ArticleDetail = loadable(()=>import('../pages/web/list/detail'))
+const Archive = loadable(()=>import('../pages/web/archive'))
+const About = loadable(()=>import('../pages/web/about'))
+const Star = loadable(()=>import('../pages/web/star'))
 
 const webRoutes = [
   {
