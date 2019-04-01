@@ -23,14 +23,13 @@ class App extends Component {
       collapsed: !this.state.collapsed,
     });
   }
-  async componentDidMount () {
-    document.title = 'Blog-admin'
+  componentDidMount () {
+    document.title = 'admin'
   }
   handleClickMenuItem (item) {
     sessionStorage.setItem('menuItmeKey', String(item.key))
   }
   handleClickDrop () {
-    console.log(11)
     this.props.history.push('/login')
   }
   menuItem = () => {
@@ -77,19 +76,21 @@ class App extends Component {
                   </Dropdown>
                 </span>
               </Header>
-              <Content className='content'>
-                {routes.map((route, i) => (
-                  <Route
-                  key={i}
-                  excat={route.excat}
-                  path={route.path}
-                  component={route.component}
-                />
-                ))}
-              </Content>
-              <Footer style={{ textAlign: 'center' }}>
+              <div className='wrap-content'>
+                <Content className='content'>
+                  {routes.map((route, i) => (
+                    <Route
+                    key={i}
+                    excat={route.excat}
+                    path={route.path}
+                    component={route.component}
+                  />
+                  ))}
+                </Content>
+              </div>
+              {/* <Footer style={{ textAlign: 'center' }}>
                 Created by Gong
-              </Footer>
+              </Footer> */}
             </Layout>
           </Layout>
         </div>

@@ -56,7 +56,7 @@ class BlogList extends Component {
         <List
           itemLayout="vertical"
           size="large"
-          pagination={pagination}
+          pagination={this.state.data.length ? pagination : null}
           dataSource={this.state.data}
           renderItem={(item, index) => (
             <List.Item
@@ -69,7 +69,6 @@ class BlogList extends Component {
                     <Tag
                       key={item + Math.random()}
                       color={color[Math.floor(Math.random()*color.length)]}
-                      // onClick={()=>this.props.history.push(`/app/tags/${v}`)}
                     >
                       {v}
                     </Tag>
@@ -81,15 +80,11 @@ class BlogList extends Component {
                     <Tag
                       key={item + Math.random()}
                       color='green'
-                      // onClick={()=>this.props.history.push(`/app/tags/${v}`)}
                     >
                       {v}
                     </Tag>
                   ))
                 }/> : null
-              ]}
-              extra={[
-                // timetrans(item.createdAt)
               ]}
             >
               <List.Item.Meta

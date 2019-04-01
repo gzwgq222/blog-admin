@@ -48,7 +48,7 @@ class Collect extends Component {
           className="star-list"
           header={<div className="star-header">文章收藏</div>}
           itemLayout="vertical"
-          pagination={pagination}
+          pagination={this.state.data.length ? pagination : null}
           dataSource={this.state.data}
           renderItem={item => (
             <List.Item key={item.id} extra={item.date} >
