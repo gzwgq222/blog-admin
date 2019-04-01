@@ -86,6 +86,7 @@ class BlogList extends Component {
                   ))
                 }/> : null
               ]}
+              extra={[]}
             >
               <List.Item.Meta
                 // className="list-item"

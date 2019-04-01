@@ -5,7 +5,7 @@ import { Layout, Menu, Icon, Avatar, Dropdown } from 'antd'
 import routes from '../../../Router/admin'
 import './index.less'
 
-const { Header, Sider, Content, Footer } = Layout
+const { Header, Sider, Content } = Layout
 
 class App extends Component {
   constructor(props) {
