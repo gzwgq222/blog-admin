@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Card, Tag, Icon } from 'antd'
+import { Card, Icon } from 'antd'
 import { EditorState, ContentState } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import htmlToDraft from 'html-to-draftjs'
 import api from '../../../api'
-import { color } from '../../../utils'
 import './detail.less'
 
 class ArticleDetail extends Component {

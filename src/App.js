@@ -5,8 +5,10 @@ import {
   HashRouter,
   Route,
   Redirect
-} from 'react-router-dom';
+} from 'react-router-dom'
+
 import routes from './Router'
+import AuthRouter  from './AuthRouter'
 
 class App extends Component {
   render() {
@@ -15,15 +17,11 @@ class App extends Component {
         <div>
         <Route exact path="/" render={() => <Redirect to="/web/index" push />} />
         {/* <Route exact path="/web" render={() => <Redirect to="/web/index" push />} /> */}
-        {routes.map((route, i) => (
-          <Route
-          key={i}
-          path={route.path}
-          render={props => (
-            <route.component {...props} routes={route.routes} />
-          )}
-         />
-        ))}
+        {routes.map((v, i) => {
+          return v.path === 'path'
+            ? <Route key={i} path={v.path} component={v.component} />
+            : <Route key={i} path={v.path} component={v.component} />
+        })}
         </div>
       </HashRouter>
     );

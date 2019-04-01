@@ -170,17 +170,14 @@ class createArticle extends React.Component {
               onEditorStateChange={this.onEditorStateChange.bind(this)}
             />
           </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
+          <Form.Item wrapperCol={{span: 24}}>
+            <div className="article-button">
+              <Button type="primary" htmlType="submit">
               { txt }
-            </Button>
+              </Button>
+            </div>
           </Form.Item>
         </Form>
-        <div className="article-button">
-          <Button type="primary" htmlType="submit">
-          { txt }
-          </Button>
-        </div>
       </div>
     )
   }
