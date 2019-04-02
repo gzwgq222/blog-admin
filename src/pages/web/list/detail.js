@@ -3,6 +3,7 @@ import { Card, Icon } from 'antd'
 import { EditorState, ContentState } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import htmlToDraft from 'html-to-draftjs'
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import api from '../../../api'
 import './detail.less'
 
