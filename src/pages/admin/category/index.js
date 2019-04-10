@@ -20,25 +20,25 @@ class articleList extends React.Component {
       data: [],
       columns: [
         {
-          title: 'index',
+          title: '序号',
           dataIndex: 'index',
           key: 'index',
           width: 80,
           align: 'center'
         },
         {
-          title: 'category',
+          title: '分类',
           dataIndex: 'name',
           render: name => (
             <Tag color={color[Math.floor(Math.random()*color.length)]}>{ name }</Tag>
           )
         },
         {
-          title: 'time',
+          title: '创建时间',
           dataIndex: 'createdAt'
         },
         {
-          title: 'action',
+          title: '操作',
           key: 'action',
           width: 120,
           align: 'center',

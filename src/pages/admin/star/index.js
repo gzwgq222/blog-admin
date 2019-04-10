@@ -16,22 +16,22 @@ class articleList extends React.Component {
       data: [],
       columns: [
         {
-          title: 'index',
+          title: '序号',
           dataIndex: 'index',
           key: 'index',
           width: 80,
           align: 'center'
         },
         {
-          title: 'title',
+          title: '标题',
           dataIndex: 'title'
         },
         {
-          title: 'time',
+          title: '创建时间',
           dataIndex: 'createdAt'
         },
         {
-          title: 'Action',
+          title: '操作',
           key: 'action',
           width: 120,
           align: 'center',

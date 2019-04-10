@@ -15,30 +15,25 @@ class articleList extends React.Component {
       pageSize: 10,
       columns: [
         {
-          title: 'index',
+          title: '序号',
           dataIndex: 'index',
           key: 'index',
           width: 80,
           align: 'center'
         },
         {
-          title: 'title',
+          title: '标题',
           dataIndex: 'title',
           key: 'title'
         },
         {
-          title: 'author',
-          dataIndex: 'author',
-          key: 'keywaorld',
-        },
-        {
-          title: 'summary',
+          title: '摘要',
           dataIndex: 'summary',
           key: 'summary',
           width: 400
         },
         {
-          title: 'category',
+          title: '分类',
           dataIndex: 'category',
           key: 'category',
           render: category => (
@@ -46,17 +41,22 @@ class articleList extends React.Component {
           )
         },
         {
-          title: 'state',
-          dataIndex: 'state',
-          key: 'state',
+          title: '访问次数',
+          dataIndex: 'readedCount',
+          key: 'readedCount'
         },
         {
-          title: 'time',
+          title: '创建时间',
           dataIndex: 'createdAt',
           key: 'createdAt'
         },
         {
-          title: 'action',
+          title: '更新时间',
+          dataIndex: 'updatedAt',
+          key: 'updatedAt'
+        },
+        {
+          title: '操作',
           align: 'center',
           width: 180,
           render: record => (
