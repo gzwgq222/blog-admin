@@ -63,7 +63,6 @@ class BlogList extends Component {
               key={index}
               actions={
               [ 
-                <IconText type="calendar" text={item.createdAt} />,
                 <IconText type="tags-o" text={
                   item.tag.map(v => (
                     <Tag
@@ -84,7 +83,9 @@ class BlogList extends Component {
                       {v}
                     </Tag>
                   ))
-                }/> : null
+                }/> : null,
+                <IconText type="calendar" text={item.createdAt} />,
+                <IconText type="eye" text={`${item.readedCount} 次预览`} />
               ]}
             >
               <List.Item.Meta

@@ -43,7 +43,8 @@ class articleList extends React.Component {
         {
           title: '访问次数',
           dataIndex: 'readedCount',
-          key: 'readedCount'
+          key: 'readedCount',
+          width: 100
         },
         {
           title: '创建时间',
